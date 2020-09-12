@@ -95,8 +95,7 @@ function successHandler(resp, resolve) {
  */
 function errorHandler(resp) {
     Notify({
-        message:
-            resp && resp.data ? `异常信息：${resp.data.message || resp.data.msg || '系统异常'}` : '异常信息：系统异常',
+        message: resp && resp.data ? `${resp.data.message || resp.data.msg || '系统异常'}` : '异常信息：系统异常',
         color: '#ad0000',
         background: '#ffe1e1',
         duration: 3000
