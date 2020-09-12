@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { Notify } from 'vant';
+import { Icon, Notify } from 'vant';
 
 Vue.prototype.$notify = options => {
     if (typeof options === 'string' || (typeof options === 'object' && options.type === 'danger')) {
@@ -16,3 +16,4 @@ Vue.prototype.$notify = options => {
 };
 
 Vue.component(Notify.name, Notify);
+Vue.component(Icon.name, Icon);

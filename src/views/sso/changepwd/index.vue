@@ -53,7 +53,10 @@ export default {
             if (code === 200) {
                 this.$notify({
                     type: 'success',
-                    message: '密码重置成功'
+                    message: '密码重置成功',
+                    onClose: () => {
+                        location.reload();
+                    }
                 });
             }
         },
@@ -93,7 +96,7 @@ export default {
                 this.passErr = true;
                 return false;
             } else if (!this.checkPass(this.newPassword)) {
-                this.passErrText = '密码长度7-24位，需要包含小写字母&大写字母&数字';
+                this.passErrText = '密码长度8-24位，需要包含小写字母&大写字母&数字';
                 this.passErr = true;
                 return false;
             } else {
@@ -115,7 +118,7 @@ export default {
             const regUpper = /[A-Z]/;
             const regLower = /[a-z]/;
             const numbers = /[0-9]/;
-            const reg = /^[a-zA-Z0-9]{7,24}$/;
+            const reg = /^[a-zA-Z0-9]{8,24}$/;
             let complex = 0;
             if (regLower.test(str)) {
                 ++complex;
