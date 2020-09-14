@@ -1,0 +1,90 @@
+.container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 60px;
+    bottom: 0;
+    background: #F3F5F7;
+    .status_wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 15px 0;
+        background: #fff;
+        .icon_clock {
+            font-size: 60px;
+            color: #ff9d12;
+        }
+        h3 {
+            font-size: 15px;
+            color: #333;
+            margin-top: 10px;
+        }
+        p {
+            font-size: 13px;
+            color: #999;
+            margin-top: 10px;
+        }
+    }
+    .channel_menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        .channel_item {
+            width: 85%;
+            height: 56px;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            border-radius: 6px;
+            padding: 0 10px;
+            .item_left {
+                font-size: 15px;
+                color: #31CF6E
+            }
+            .item_right {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                align-items: center;
+                .icon_checked {
+                    font-size: 20px;
+                    color: #31CF6E
+                }
+                .icon_clock {
+                    font-size: 20px;
+                    color: #ff9d12
+                }
+                .icon_clear {
+                    font-size: 20px;
+                    color: #ff7068
+                }
+                .icon_question {
+                    font-size: 20px;
+                    color: #999
+                }
+                span {
+                    font-size: 13px;
+                    color: #999;
+                    margin-left: 3px;
+                }
+            }
+        }
+    }
+    button {
+        width: 90%;
+        display: block;
+        margin: 20px auto 0;
+        height: 90rpx;
+        color: #31CF6E;
+        border: 1px solid #31CF6E;
+        border-radius: 20px;
+        font-size: 15px;
+    }
+}

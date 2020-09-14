@@ -1,0 +1,135 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    .form_wrapper {
+        width: 100%;
+        padding: 0 12px;
+        box-sizing: border-box;
+        margin-top: 10px;
+        .license_wrapper {
+            .license_title {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 15px;
+                h3 {
+                    font-size: 17px;
+                    color: #333;
+                }
+                span {
+                    padding: 5px 10px;
+                    border: 1px solid #31CF6E;
+                    color: #31CF6E;
+                    border-radius: 5px;
+                }
+            }
+            ul {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding: 0 0 15px 0;
+                position: relative;
+                li {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    align-items: center;
+                    padding: 15px 0;
+                    label {
+                        width: 130px;
+                        font-size: 14px;
+                        color: #333;
+                    }
+                    input {
+                        border: 0;
+                        font-size: 12px;
+                        margin: 0;
+                        padding: 0;
+                        text-align: left;
+                        text-indent: 5;
+                        flex: 1;
+                        color: #666;
+                        font-size: 13px;
+                        padding: 5px 0;
+                        background: transparent
+                    }
+                    .input_btn {
+                        color: #999;
+                    }
+                    .icon_arrow {
+                        font-size: 15px;
+                        font-weight: bold;
+                        color: #999999
+                    }
+                    .range_title {
+                        flex: 1;
+                        font-size: 13px;
+                        color: #666
+                    }
+                }
+                .license_img {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: center;
+                    .license_title0 {
+                        width: 100%;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+                        p {
+                            font-size: 14px;
+                            color: #999;
+                            span {
+                                color: #666
+                            }
+                        }
+                    }
+                    .license_photo {
+                        width: 100%;
+                        margin: 20px 0 0 0;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: flex-start;
+                        align-items: center;
+                        box-sizing: border-box;
+                        position: relative;
+                        img {
+                            width: 32%;
+                        }
+                    }
+                }
+                .remove {
+                    width: 30px;
+                    height: 30px;
+                    position: absolute;
+                    right: 0;
+                    top: -15px;
+                    padding: 0;
+                    .close_btn {
+                        font-size: 20px;
+                        padding: 5px;
+                        font-weight: bold;
+                        color: #999999
+                    }
+                }
+            }
+        }
+    }
+    button {
+        width: 90%;
+        display: block;
+        margin: 20px auto;
+        height: 45px;
+        background: #31CF6E;
+        color: #fff;
+        border-radius: 20px;
+        font-size: 15px;
+    }
+}

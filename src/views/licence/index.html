@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="form_wrapper">
+        <div class="license_wrapper">
+            <div class="license_title">
+                <label>营业执照*</label>
+                <p><span>{{uploadPhotoNum}}</span>/3</p>
+            </div>
+            <div class="license_photo">
+                <div class="license_img_add" v-for="(item,index) in licenceInfo.businessLicensePhoto" :key="index">
+                    <div class="license_img_box" v-if="item">
+                        <img src="../../assets/img/logo.png">
+                        <div class="shade"></div>
+                        <van-icon name="clear" class="icon_close" @click="removePhoto(index)" />
+                    </div>
+                    <div class="license_img_box" v-else>
+                        <p>+</p>
+                        <span>点击上传</span>
+                    </div>
+                    <CreateChooseImg @getCameraImg="getCameraImg" :getImgSub="index"></CreateChooseImg>
+                </div>
+                <div class="license_img_add" v-if="licenceInfo.businessLicensePhoto.length<3" @click="addPhoto">
+                    <div class="license_img_box">
+                        <label>＋</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form_info">
+        <ul>
+            <li>
+                <label>执照类型名称*</label>
+                <input type="text" placeholder="请输入执照类型名称" v-model="licenceInfo.bankCardName" />
+            </li>
+            <li>
+                <label>许可证编码*</label>
+                <input type="text" placeholder="请输入许可证编码" v-model="licenceInfo.bankCardNumber" />
+            </li>
+            <li>
+                <label>注册地址*</label>
+                <input type="text" placeholder="注册地址" v-model="licenceInfo.bankCardDeposit" />
+            </li>
+            <li>
+                <label>有效期至*</label>
+                <input type="button" value="请输入许可证结束日期" class="input_btn" data-id="1" @click="showCalendar" />
+                <van-icon name="arrow" class="icon_arrow" />
+            </li>
+            <li>
+                <label>签发日期*</label>
+                <input type="button" value="请输入许可证核准日期" class="input_btn" data-id="2" />
+                <van-icon name="arrow" class="icon_arrow" />
+            </li>
+            <li class="range_wrapper">
+                <label>备注</label>
+                <textarea type="text" placeholder="请输入备注信息，如地方法规，行业规范等！" v-model="licenceInfo.businessScope"></textarea>
+            </li>
+        </ul>
+    </div>
+    <van-button type="primary" @click="nextStep">继续补充</van-button>
+    <van-popup v-model="calendar" position="bottom">
+        <ComCalendar v-model="comCalendar" mode="range" @change="changeCalendar"></ComCalendar>
+    </van-popup>
+</div>

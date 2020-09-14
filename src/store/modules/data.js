@@ -1,10 +1,14 @@
-import Vue from 'vue';
+const SAVE_STEP = 'save_step';
 
-const vue = new Vue();
+const state = {
+    step: ''
+};
 
-const state = {};
-
-const mutations = {};
+const mutations = {
+    [SAVE_STEP](state, { playload }) {
+        state.step = playload;
+    }
+};
 
 const actions = {};
 

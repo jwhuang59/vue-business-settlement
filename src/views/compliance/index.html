@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="form_wrapper">
+        <ul>
+            <li class="license_wrapper">
+                <div class="license_title">
+                    <label>营业执照*</label>
+                    <p><span>{{uploadPhotoNum}}</span>/3</p>
+                </div>
+                <div class="license_photo">
+                    <div class="license_img_add" v-for="(item,index) in complianceInfo.businessLicensePhoto" :key="index">
+                        <div class="license_img_box" v-if="item">
+                            <img src="../../assets/img/logo.png">
+                            <div class="shade"></div>
+                            <van-icon name="clear" class="icon_close" @click="removePhoto(index)" />
+                        </div>
+                        <div class="license_img_box" v-else>
+                            <p>+</p>
+                            <span>点击上传</span>
+                        </div>
+                        <CreateChooseImg @getCameraImg="getCameraImg" :getImgSub="index"></CreateChooseImg>
+                    </div>
+                    <div class="license_img_add" v-if="complianceInfo.businessLicensePhoto.length<3" @click="addPhoto">
+                        <div class="license_img_box">
+                            <label>＋</label>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <label>营业执照名称*</label>
+                <input type="text" placeholder="请输入营业执照名称" v-model="complianceInfo.businessLicenseName" />
+            </li>
+            <li>
+                <label>法定代表人*</label>
+                <input type="number" placeholder="请输入法定代表人" v-model="complianceInfo.legalRepresentativeName" />
+            </li>
+            <li>
+                <label>统一信用代码*</label>
+                <input type="text" placeholder="请输入统一信用代码" v-model="complianceInfo.creditCode" />
+            </li>
+            <li>
+                <label>注册地址*</label>
+                <input type="text" placeholder="请输入营业执照注册地址" v-model="complianceInfo.businessRegisteredAddress" />
+            </li>
+            <li class="validity_flex">
+                <label>有效期*</label>
+                <div class="validity_wrapper">
+                    <van-radio-group v-model="radio">
+                        <div class="validity_item">
+                            <div class="item_left">
+                                <p>长期有效</p>
+                                <span>执照上，没有经营期限的为长期有效</span>
+                            </div>
+                            <div class="item_right">
+                                <van-radio name="1" checked-color="#07c160" icon-size="20px"></van-radio>
+                            </div>
+                        </div>
+                        <div class="validity_item">
+                            <div class="item_left">
+                                <p>固定有效期</p>
+                                <span>请选择营业执照上显示的准确有效期</span>
+                            </div>
+                            <div class="item_right">
+                                <van-radio name="2" checked-color="#07c160" icon-size="20px"></van-radio>
+                            </div>
+                        </div>
+                        <div class="calendar_wrapper" v-if="radio === '2'">
+                            <input type="button" value="请选择有效期" class="calendar_btn" @click="changeCalendar" />
+                            <van-icon name="arrow" class="icon_arrow" />
+                        </div>
+                    </van-radio-group>
+                </div>
+            </li>
+            <li>
+                <label>核准日期*</label>
+                <input type="text" placeholder="请输入营业执照核准日期（营业执照右下角）" v-model="complianceInfo.businessApprovalTime" />
+            </li>
+            <li class="range_wrapper">
+                <label>经营范围</label>
+                <textarea type="text" placeholder="请输入营业范围" v-model="complianceInfo.businessScope"></textarea>
+            </li>
+        </ul>
+    </div>
+    <van-button type="primary" @click="nextStep">完成 · 并开通锅圈商城</van-button>
+    <van-calendar v-model="showCalendar" @confirm="getValidity" color="#31CF6E" />
+</div>

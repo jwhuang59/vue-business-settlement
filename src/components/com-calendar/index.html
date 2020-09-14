@@ -1,0 +1,53 @@
+<div class="u-calendar">
+    <div class="u-calendar__header">
+        <div class="u-calendar__header__text" v-if="!$slots['tooltip']">
+            {{toolTip}}
+        </div>
+        <slot v-else name="tooltip" />
+    </div>
+    <div class="u-calendar__action u-flex u-row-center">
+        <div class="u-calendar__action__icon">
+            <i class="icon_left_double" v-if="changeYear" name="arrow-left-double" :color="yearArrowColor" @click="changeYearHandler(0)"></i>
+        </div>
+        <div class="u-calendar__action__icon">
+            <i class="icon_left" v-if="changeMonth" name="arrow-left" :color="monthArrowColor" @click="changeMonthHandler(0)"></i>
+        </div>
+        <div class="u-calendar__action__text">{{ showTitle }}</div>
+        <div class="u-calendar__action__icon">
+            <i class="icon_right" v-if="changeMonth" name="arrow-right" :color="monthArrowColor" @click="changeMonthHandler(1)"></i>
+        </div>
+        <div class="u-calendar__action__icon">
+            <i class="icon_right" v-if="changeYear" name="arrow-right-double" :color="yearArrowColor" @click="changeYearHandler(1)"></i>
+        </div>
+    </div>
+    <div class="u-calendar__week-day">
+        <div class="u-calendar__week-day__text" v-for="(item, index) in weekDayZh" :key="index">{{item}}</div>
+    </div>
+    <div class="u-calendar__content">
+        <!-- 前置空白部分 -->
+        <block v-for="(item, index) in weekdayArr" :key="index">
+            <div class="u-calendar__content__item"></div>
+        </block>
+        <div class="u-calendar__content__item" :class="{
+            'u-hover-class':openDisAbled(year,month,index+1),
+            'u-calendar__content--start-date': (mode == 'range' && startDate==`${year}-${month}-${index+1}`) || mode== 'date',
+            'u-calendar__content--end-date':(mode== 'range' && endDate==`${year}-${month}-${index+1}`) || mode == 'date'
+        }" :style="{backgroundColor: getColor(index,1)}" v-for="(item, index) in daysArr" :key="index" @tap="dateClick(index)">
+            <div class="u-calendar__content__item__inner">
+                <div :style="{color: getColor(index,2)}">{{ index + 1 }}</div>
+            </div>
+            <div class="u-calendar__content__item__tips" :style="{color:activeColor}" v-if="mode== 'range' && startDate==`${year}-${month}-${index+1}` && startDate!=endDate">{{startText}}</div>
+            <div class="u-calendar__content__item__tips" :style="{color:activeColor}" v-if="mode== 'range' && endDate==`${year}-${month}-${index+1}`">{{endText}}</div>
+        </div>
+        <div class="u-calendar__content__bg-month">{{month}}</div>
+    </div>
+    <div class="u-calendar__bottom">
+        <div class="u-calendar__bottom__choose">
+            <p>{{mode == 'date' ? activeDate : startDate}}</p>
+            <p v-if="endDate">至{{endDate}}</p>
+        </div>
+        <div class="u-calendar__bottom__btn">
+            <u-button :type="btnType" shape="circle" size="default" @click="btnFix(false)">确定</u-button>
+        </div>
+    </div>
+</div>

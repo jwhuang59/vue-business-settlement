@@ -53,7 +53,9 @@ export default {
         }
     },
     mounted() {
-        this.$request('getVerifyServ').then();
+        this.$request('getVerifyServ').then(() => {
+            
+        });
     }
 };
 </script>

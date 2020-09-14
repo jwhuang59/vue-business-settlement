@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="form_wrapper">
+        <div class="license_wrapper" v-for="(item,index) in perfectMenu" :key="index">
+            <div class="license_title">
+                <label>{{item.title}}</label>
+                <p><span>{{item.uploadPhotoNum}}</span>/{{item.photoNum}}</p>
+            </div>
+            <div class="license_photo">
+                <div class="license_img_add" v-for="(imgs,i) in item.uploadPhotoMenu" :key="i">
+                    <div class="license_img_box" v-if="imgs">
+                        <img src="../../assets/img/logo.png">
+                        <div class="shade"></div>
+                        <van-icon name="clear" class="icon_close" @click="removePhoto(index,i)" />
+                    </div>
+                    <div class="license_img_box" v-else :data-id="imgs">
+                        <p>+</p>
+                        <span>点击上传</span>
+                    </div>
+                    <CreateChooseImg @getCameraImg="getCameraImg" :getImgType="index" :getImgSub="i"></CreateChooseImg>
+                </div>
+                <div class="license_img_add" v-if="item.uploadPhotoMenu.length<item.photoNum" @click="addPhoto(index)">
+                    <div class="license_img_box">
+                        <label>＋</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <van-button type="primary" @click="nextStep">完成 · 并开通</van-button>
+</div>

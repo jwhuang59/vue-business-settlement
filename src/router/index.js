@@ -9,10 +9,10 @@ const router = new VueRouter({
     routes
 });
 
-router.afterEach(() => {
-    if (document.querySelector('.ak-container')) {
-        document.querySelector('.ak-container').scrollTo(0, 0);
-    }
-});
+// router.afterEach(() => {
+//     if (document.querySelector('.ak-container')) {
+//         document.querySelector('.ak-container').scrollTo(0, 0);
+//     }
+// });
 
 export default router;

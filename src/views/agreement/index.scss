@@ -1,0 +1,51 @@
+.container {
+    .agreement_wrapper {
+        padding: 0 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        h3 {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        span {
+            width: 100%;
+            text-align: left;
+            font-size: 14px;
+            margin: 10px 0
+        }
+        .scroll_box {
+            font-size: 13px;
+            color: #999;
+            overflow-y: scroll;
+            text-indent: 28px;
+            letter-spacing: 1px;
+        }
+        .checked {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            p {
+                font-size: 13px;
+                color: #666;
+                margin-left: 5px;
+                span {
+                    color: #31CF6E
+                }
+            }
+        }
+    }
+    button {
+        width: 90%;
+        display: block;
+        margin: 20px auto;
+        height: 45px;
+        background: #31CF6E;
+        color: #fff;
+        border-radius: 20px;
+        font-size: 15px;
+    }
+}

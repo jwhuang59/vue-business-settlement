@@ -1,0 +1,87 @@
+<div class="container">
+    <div class="form_wrapper">
+        <ul>
+            <li>
+                <label>门店名称*</label>
+                <input type="text" placeholder="请输入门店名称" v-model="basicInfo.storeName" />
+            </li>
+            <li>
+                <label>联系电话*</label>
+                <input type="number" placeholder="请输入门店联系电话" v-model="basicInfo.storePhone" />
+            </li>
+            <li>
+                <label>地区*</label>
+                <input type="button" :value="basicInfo.areaText" :class="[basicInfo.storeRegion ? 'color' : '','map_btn']" @click="changePicker" />
+                <van-icon name="arrow" class="icon_arrow" />
+            </li>
+            <li>
+                <label>详细地址*</label>
+                <input type="text" placeholder="街道门牌号等信息" v-model="basicInfo.storeAddress" />
+            </li>
+            <li>
+                <label>身份证号码*</label>
+                <input type="text" placeholder="请输入身份证号码" v-model="basicInfo.IDCardNumber" />
+            </li>
+        </ul>
+        <div class="idCard_wrapper">
+            <div class="idCard_info">
+                <div class="wrapper_text">
+                    <label>上传身份证*</label>
+                    <p>照片须为身份证证件照，身份证号须清晰可见</p>
+                </div>
+                <div class="idCard_img">
+                    <div class="idCard_img_add">
+                        <div class="idCard_img_box" v-if="basicInfo.frontIDCard">
+                            <img src="../../assets/img/logo.png">
+                            <div class="shade"></div>
+                            <van-icon name="clear" class="icon_close" @click="removePhoto(1)" />
+                        </div>
+                        <div class="idCard_img_box" v-else>
+                            <p>+</p>
+                            <span>正面照片</span>
+                        </div>
+                        <CreateChooseImg @getCameraImg="frontIDCard"></CreateChooseImg>
+                    </div>
+                    <div class="idCard_img_add">
+                        <div class="idCard_img_box" v-if="basicInfo.afterIDCard">
+                            <img src="../../assets/img/logo.png">
+                            <div class="shade"></div>
+                            <van-icon name="clear" class="icon_close" @click="removePhoto(2)" />
+                        </div>
+                        <div class="idCard_img_box" v-else>
+                            <p>+</p>
+                            <span>反面照片</span>
+                        </div>
+                        <CreateChooseImg @getCameraImg="afterIDCard"></CreateChooseImg>
+                    </div>
+                </div>
+            </div>
+            <div class="idCard_info">
+                <div class="wrapper_text">
+                    <label>手持身份证照*</label>
+                    <p>照片须为手持身份证半身照，身份证号须清晰可见</p>
+                </div>
+                <div class="idCard_img">
+                    <div class="idCard_img_add">
+                        <div class="idCard_img_box" v-if="basicInfo.holdIDCard">
+                            <img src="../../assets/img/logo.png">
+                            <div class="shade"></div>
+                            <van-icon name="clear" class="icon_close" @click="removePhoto(3)" />
+                        </div>
+                        <div class="idCard_img_box" v-else>
+                            <p>+</p>
+                            <span>手持身份证照</span>
+                        </div>
+                        <CreateChooseImg @getCameraImg="holdIDCard"></CreateChooseImg>
+                    </div>
+                    <div class="idCard_img_add clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <van-button type="primary" @click="nextStep">保存 · 下一步</van-button>
+    <van-popup v-model="showPicker" position="bottom">
+        <van-picker show-toolbar title="选择地址" :columns="cityList" @cancel="cancelPicker" @confirm="confirmPicker" />
+    </van-popup>
+
+</div>

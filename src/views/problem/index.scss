@@ -1,0 +1,27 @@
+.container {
+    .problem_menu {
+        width: 100%;
+        padding: 15px 12px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        .problem_item {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            h4 {
+                margin-bottom: 10px;
+                font-size: 14px;
+                color: #333
+            }
+            p {
+                font-size: 12px;
+                color: #999
+            }
+        }
+    }
+}

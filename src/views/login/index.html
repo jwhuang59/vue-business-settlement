@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="form_wrapper">
+        <div class="login_logo">
+            <img src="../../assets/img/logo.png" />
+        </div>
+        <div class="login_wrapper">
+            <div class="form_item">
+                <img src="../../assets/img/member.png" />
+                <div class="code_wrapper">
+                    <input type="number" placeholder="请输入预留手机号" v-model="phone" />
+                </div>
+            </div>
+            <div class="form_item">
+                <img src="../../assets/img/code.png" />
+                <div class="code_wrapper">
+                    <input type="number" placeholder="请输入验证码" v-model="code" />
+                    <div :class="[isSend ? 'isSend' : '','code']" @click="sendCode">{{codeText > 0 ? codeText + 's' : codeText}}</div>
+                </div>
+            </div>
+        </div>
+        <van-button type="primary" @click="submit" class="submit">登录</van-button>
+    </div>
+</div>

@@ -47,7 +47,18 @@ export default {
             }
             this.$router.push(path);
         },
-
+        back(path) {
+            this.$router.go(path);
+        },
+        redirect(path, query) {
+            if (query) {
+                path = {
+                    path,
+                    query
+                };
+            }
+            this.$router.replace(path);
+        },
         getApiParams(obj) {
             const params = {};
             for (const key of Object.keys(obj)) {

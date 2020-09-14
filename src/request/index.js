@@ -4,7 +4,7 @@ import apis from './modules';
 import { Notify } from 'vant';
 import { loading } from '@/commons/loading';
 
-const BaseUrl = '/rolloutapi';
+const BaseUrl = process.env.VUE_APP_BASE;
 
 let httpCount = 0;
 

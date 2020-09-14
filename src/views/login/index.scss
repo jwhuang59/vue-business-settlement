@@ -1,0 +1,85 @@
+.container {
+    .form_wrapper {
+        width: 100%;
+        overflow: hidden;
+        position: absolute;
+        top: 45px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        .login_logo {
+            width: 120%;
+            height: 30%;
+            background: #31CF6E;
+            border-bottom-left-radius: 60%;
+            border-bottom-right-radius: 60%;
+            position: relative;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, 0);
+            img {
+                width: 100px;
+                height: 100px;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+        .login_wrapper {
+            width: 80%;
+            margin: 10% auto;
+            .form_item {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                padding: 10px 0;
+                margin-top: 5px;
+                position: relative;
+                img {
+                    width: 24px;
+                    height: 24px;
+                }
+                .code_wrapper {
+                    flex: 1;
+                    border-bottom: 1px solid #ddd;
+                    input {
+                        border: 0;
+                        padding: 8px 0;
+                        margin-left: 10px;
+                        font-size: 14px;
+                        color: #333;
+                    }
+                    .code {
+                        width: 100px;
+                        padding: 6px 0;
+                        background: #3CC973;
+                        border-radius: 5px;
+                        text-align: center;
+                        color: #fff;
+                        font-size: 13px;
+                        margin: 6px 0;
+                        position: absolute;
+                        right: 0;
+                        bottom: 10px
+                    }
+                    .isSend {
+                        background: #ddd;
+                    }
+                }
+            }
+        }
+        button {
+            width: 80%;
+            display: block;
+            margin: 20px auto;
+            height: 45px;
+            background: #31CF6E;
+            color: #fff;
+            border-radius: 20px;
+            font-size: 15px;
+        }
+    }
+}
