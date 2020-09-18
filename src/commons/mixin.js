@@ -86,7 +86,6 @@ export default {
             const link = document.createElement('a');
             link.href = url;
             let fileName = fileType ? name + '.' + fileType : name + '.xlsx';
-            console.log(res);
             if (!res.headers) {
                 const contentDisposition = res.headers['content-disposition'];
                 const fileNameMatch = contentDisposition.split('filename=');

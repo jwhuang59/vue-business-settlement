@@ -59,7 +59,6 @@ export default {
             this.perfectMenu[t].uploadPhotoMenu.splice(i, 1);
         },
         nextStep() {
-            console.log(this.perfectMenu);
             if (
                 this.perfectMenu[0].uploadPhotoMenu[0] === '' ||
                 this.perfectMenu[0].uploadPhotoMenu[0] === undefined ||

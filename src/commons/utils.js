@@ -7,7 +7,6 @@ const isNaN = require('lodash/isNaN');
 const isNumber = require('lodash/isNumber');
 // 时间库(https://github.com/iamkun/dayjs)
 const dayjs = require('dayjs');
-
 /**
  * @description: 将对象重新封装成{code:'',label:''}型对象,原对象属性为code 原对象属性值为label
  * @param {Object}
@@ -52,9 +51,9 @@ const format = (val, format = 'YYYY-MM-DD') => {
  * @param {*} y
  */
 const getMixMaxDate = y => {
-    const year = dayjs.year();
-    const month = dayjs.month();
-    const date = dayjs.date();
+    const year = dayjs().year();
+    const month = dayjs().month();
+    const date = dayjs().date();
     const minDate = new Date(year - y, month, date);
     const maxDate = new Date(year + y, month, date);
 
@@ -72,6 +71,7 @@ const Utils = {
 
 const install = function (Vue) {
     Vue.prototype.$utils = Utils;
+    Vue.prototype.dayjs = dayjs;
 };
 
 export default install;

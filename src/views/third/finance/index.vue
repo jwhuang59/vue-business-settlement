@@ -22,7 +22,7 @@ export default {
             showPicker: false,
             cashierColumns: [
                 {
-                    values: ['龙收银', '思迅']
+                    values: ['思迅', '龙收银']
                 }
             ]
         };
@@ -35,11 +35,11 @@ export default {
             this.$request('getFinancialInfo').then(res => {
                 this.financeInfo.cashierSystem = res.data.cashierSystem;
                 switch (res.data.cashierSystem) {
-                    case 0:
-                        this.financeInfo.cashierSystemCn = '龙收银';
-                        break;
                     case 1:
                         this.financeInfo.cashierSystemCn = '思迅';
+                        break;
+                    case 2:
+                        this.financeInfo.cashierSystemCn = '龙收银';
                         break;
                 }
                 this.financeInfo.alipayAccount = res.data.alipayAccount;
@@ -55,7 +55,7 @@ export default {
         },
         confirmPicker(e) {
             this.showPicker = false;
-            this.financeInfo.cashierSystem = this.$refs.picker.getIndexes()[0];
+            this.financeInfo.cashierSystem = this.$refs.picker.getIndexes()[0] + 1;
             this.financeInfo.cashierSystemCn = e[0];
         },
         showNotes(e) {
@@ -68,7 +68,6 @@ export default {
             this.financeInfo.paymentList.pop({});
         },
         nextStep() {
-            console.log(this.financeInfo);
             if (
                 this.financeInfo.cashierSystem === '' ||
                 this.financeInfo.cashierSystem === undefined ||

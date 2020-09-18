@@ -16,7 +16,10 @@ export default {
     data() {
         return {
             complianceInfo: {
-                businessLicensePhoto: ['']
+                businessLicensePhoto: [''],
+                businessTermValidity: '1',
+                businessTermValidityText: '请选择营业执照有效期',
+                businessApprovalTime: '请选择营业执照核准日期'
             },
             uploadPhotoNum: 0,
             calendarSub: '',
@@ -27,8 +30,8 @@ export default {
         };
     },
     created() {
-        this.minDate = this.$utils.getMixMaxDate().minDate;
-        this.maxDate = this.$utils.getMixMaxDate().maxDate;
+        this.minDate = this.$utils.getMixMaxDate(10).minDate;
+        this.maxDate = this.$utils.getMixMaxDate(10).maxDate;
     },
     mounted() {
         this.getComplianceInfo();
@@ -53,9 +56,7 @@ export default {
                         this.complianceInfo.businessTermValidity = '1';
                         this.complianceInfo.businessTermValidityText = '请选择营业执照有效期';
                     }
-                    this.complianceInfo.businessApprovalTime = res.data.businessApprovalTime
-                        ? res.data.businessApprovalTime
-                        : '请选择营业执照核准日期';
+                    this.complianceInfo.businessApprovalTime = res.data.businessApprovalTime;
                     this.complianceInfo.businessScope = res.data.businessScope;
                     this.uploadPhotoNum = res.data.businessLicensePhoto.length;
                 }
@@ -94,7 +95,6 @@ export default {
             this.$set(this.complianceInfo.businessLicensePhoto, data.sub, data.img);
         },
         nextStep() {
-            console.log(this.complianceInfo);
             if (this.complianceInfo.businessLicensePhoto.length < 0) {
                 Dialog.alert({ message: '请上传营业执照照片' });
                 return false;

@@ -38,8 +38,8 @@ export default {
         };
     },
     created() {
-        this.minDate = this.$utils.getMixMaxDate().minDate;
-        this.maxDate = this.$utils.getMixMaxDate().maxDate;
+        this.minDate = this.$utils.getMixMaxDate(10).minDate;
+        this.maxDate = this.$utils.getMixMaxDate(10).maxDate;
     },
     mounted() {
         this.getLicenseInfo();
@@ -57,12 +57,8 @@ export default {
                     this.licenceList[i].licenseRegistrationAddress = licenceList[i].licenseRegistrationAddress;
                     this.licenceList[i].licenseValidity = licenceList[i].licenseValidity;
                     this.licenceList[i].licenseApprovalTime = licenceList[i].licenseApprovalTime;
-                    this.licenceList[i].licenseValidity = licenceList[i].licenseValidity
-                        ? licenceList[i].licenseValidity
-                        : '请输入许可证结束日期';
-                    this.licenceList[i].licenseApprovalTime = licenceList[i].licenseApprovalTime
-                        ? licenceList[i].licenseApprovalTime
-                        : '请输入许可证核准日期';
+                    this.licenceList[i].licenseValidity = licenceList[i].licenseValidity;
+                    this.licenceList[i].licenseApprovalTime = licenceList[i].licenseApprovalTime;
                     this.licenceList[i].remark = licenceList[i].remark;
                 }
             });
@@ -95,7 +91,6 @@ export default {
             this.$set(this.licenceList[data.sub], 'licensePhoto', data.img);
         },
         nextStep() {
-            console.log(this.licenceList);
             for (const i in this.licenceList) {
                 if (
                     this.licenceList[i].licensePhoto === '' ||

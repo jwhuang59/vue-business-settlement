@@ -141,7 +141,6 @@ export default {
             }
         },
         nextStep() {
-            console.log(this.basicInfo);
             if (
                 this.basicInfo.storeName === '' ||
                 this.basicInfo.storeName === undefined ||

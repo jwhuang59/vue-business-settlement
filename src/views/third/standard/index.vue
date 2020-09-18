@@ -18,7 +18,7 @@ export default {
             licenseArr: [{}],
             showPicker: false,
             showCalendar: false,
-            rangeColumns: ['123', '456']
+            rangeColumns: ['123', '456'],
         };
     },
     mounted() {

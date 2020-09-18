@@ -12,7 +12,8 @@ module.exports = {
                 changeOrigin: true,
                 pathRewrite: { '^/ssoapi': '/' }
             }
-        }
+        },
+        port: 8080
     },
     css: {
         loaderOptions: {

@@ -63,9 +63,17 @@ export default {
                 playload: i || ''
             });
             this.jump('agreement');
+            
         },
         getProblem() {
             this.jump('problem');
+        }
+    },
+    watch:{
+        shopStatus(val){
+            if(val === 0){
+                this.jump("basics")
+            }   
         }
     }
 };
