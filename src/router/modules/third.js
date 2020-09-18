@@ -90,7 +90,8 @@ export default [
         meta: {
             title: '店铺开通',
             isBack: true,
-            keepAlive: false
+            keepAlive: false,
+            isThird: true
         }
     },
     {
@@ -101,7 +102,8 @@ export default [
             title: '注册商家',
             style: 'style',
             isBack: true,
-            keepAlive: false
+            keepAlive: false,
+            isThird: true
         }
     },
     {
@@ -110,7 +112,8 @@ export default [
         component: () => import('@/views/third/problem'),
         meta: {
             title: '回答反馈',
-            keepAlive: false
+            keepAlive: false,
+            isThird: true
         }
     }
 ];
