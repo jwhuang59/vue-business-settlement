@@ -47,12 +47,27 @@ const format = (val, format = 'YYYY-MM-DD') => {
     return dayjs(val).format(format);
 };
 
+/**
+ * 获取时间范围
+ * @param {*} y
+ */
+const getMixMaxDate = y => {
+    const year = dayjs.year();
+    const month = dayjs.month();
+    const date = dayjs.date();
+    const minDate = new Date(year - y, month, date);
+    const maxDate = new Date(year + y, month, date);
+
+    return { minDate, maxDate };
+};
+
 const Utils = {
     cloneDeep,
     remove,
     pullAll,
     isNotEmpty,
-    format
+    format,
+    getMixMaxDate
 };
 
 const install = function (Vue) {

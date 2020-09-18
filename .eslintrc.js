@@ -10,18 +10,13 @@ module.exports = {
         getApp: true
     },
     rules: {
-        'prettier/prettier': 'off',
+        'prettier/prettier': 'error',
         'no-unused-vars': 'off',
         'no-extend-native': 'off',
         'no-debugger': 'off',
         'no-empty': 'off',
         'no-prototype-builtins': 'off',
-        'vue/no-use-v-if-with-v-for': [
-            'error',
-            {
-                allowUsingIterationVar: true
-            }
-        ]
+        'vue/no-use-v-if-with-v-for': 'off'
     },
     parserOptions: {
         parser: 'babel-eslint'

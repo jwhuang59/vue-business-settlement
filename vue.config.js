@@ -2,13 +2,17 @@ module.exports = {
     productionSourceMap: false,
     devServer: {
         proxy: {
-            '/api': {
+            '/thirdapi': {
                 target: 'http://172.17.8.5:1094',
                 changeOrigin: true,
-                pathRewrite: { '^/api': '/' }
+                pathRewrite: { '^/thirdapi': '/' }
+            },
+            '/ssoapi': {
+                target: 'http://172.17.8.56:2010',
+                changeOrigin: true,
+                pathRewrite: { '^/ssoapi': '/' }
             }
-        },
-        port: 80
+        }
     },
     css: {
         loaderOptions: {
@@ -18,4 +22,3 @@ module.exports = {
         }
     }
 };
-// target: 'http://172.17.8.5:1094',

@@ -4,6 +4,8 @@ import Mixin from './mixin';
 import Utils from './utils';
 import Storage from './storage';
 import Loading from './loading';
+import './vant';
+import './component';
 
 Vue.use(Filter);
 Vue.use(Utils);

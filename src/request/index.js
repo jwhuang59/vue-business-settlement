@@ -4,8 +4,6 @@ import apis from './modules';
 import { Notify } from 'vant';
 import { loading } from '@/commons/loading';
 
-const BaseUrl = process.env.VUE_APP_BASE + '/thirdplatform';
-
 let httpCount = 0;
 const that = this;
 /**
@@ -41,27 +39,24 @@ const request = function (name = '', data = {}) {
         sld = true
     } = getApi(name);
     header = getHeader(header, data);
-    url = BaseUrl + url;
 
     const item = {
         url,
         header,
         method,
-        data
+        data,
+        pem,
+        sld
     };
 
-    if (
-        item.method.toUpperCase() === 'GET' ||
-        item.method.toUpperCase() === 'DELETE' ||
-        item.method.toUpperCase() === 'PUT'
-    ) {
+    if (item.method.toUpperCase() === 'GET' || item.method.toUpperCase() === 'DELETE') {
         item.params = item.data;
     }
 
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
         axios(item)
             .then(resp => {
-                successHandler(resp, resolve);
+                successHandler(resp, resolve, reject);
             })
             .catch(err => {
                 errorHandler(err.response);
@@ -76,19 +71,20 @@ const request = function (name = '', data = {}) {
  * @param resp
  * @param resolve
  */
-function successHandler(resp, resolve) {
+function successHandler(resp, resolve, reject) {
     if (resp.request.responseType === 'arraybuffer') {
         resolve(resp.data);
     } else {
-        if (resp.data.code === 200 || resp.config.pem) {
+        if (resp.data.code === 200) {
             resolve(resp.data);
-        } else if (resp.data.code === 204) {
+        } else if (resp.data.code === 401) {
             if (location.pathname !== '/login') {
                 location.href = '/login';
             }
+        } else if (resp.config.pem) {
+            reject(resp.data);
         } else {
-            resolve(resp.data);
-            // errorHandler(resp);
+            errorHandler(resp);
         }
     }
 }
@@ -99,8 +95,7 @@ function successHandler(resp, resolve) {
  */
 function errorHandler(resp) {
     Notify({
-        message:
-            resp && resp.data ? `异常信息：${resp.data.message || resp.data.msg || '系统异常'}` : '异常信息：系统异常',
+        message: resp && resp.data ? `异常信息：${resp.data.message || resp.data.msg || '系统异常'}` : '系统异常',
         color: '#ad0000',
         background: '#ffe1e1',
         duration: 3000
