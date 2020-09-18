@@ -1,17 +1,18 @@
 <div class="container">
+    <!-- <van-uploader :after-read="afterRead" v-model="fileList" /> -->
     <div class="form_wrapper">
         <ul>
             <li>
                 <label>门店名称*</label>
-                <input type="text" placeholder="请输入门店名称" v-model="basicInfo.storeName" />
+                <input type="text" placeholder="请输入门店名称" v-model="basicInfo.storeName" maxlength="12" />
             </li>
             <li>
                 <label>联系电话*</label>
-                <input type="number" placeholder="请输入门店联系电话" v-model="basicInfo.storePhone" />
+                <input type="number" placeholder="请输入正确的联系电话" v-model="basicInfo.storePhone" />
             </li>
             <li>
                 <label>地区*</label>
-                <input type="button" :value="basicInfo.areaText" :class="[basicInfo.storeRegion ? 'color' : '','map_btn']" @click="changePicker" />
+                <input type="button" :value="basicInfo.areaText" :class="[basicInfo.province ? 'color' : '','map_btn']" @click="changePicker" />
                 <van-icon name="arrow" class="icon_arrow" />
             </li>
             <li>
@@ -20,7 +21,7 @@
             </li>
             <li>
                 <label>身份证号码*</label>
-                <input type="text" placeholder="请输入身份证号码" v-model="basicInfo.IDCardNumber" />
+                <input type="text" placeholder="请输入身份证号码" v-model="basicInfo.idCardNumber" />
             </li>
         </ul>
         <div class="idCard_wrapper">
@@ -31,28 +32,28 @@
                 </div>
                 <div class="idCard_img">
                     <div class="idCard_img_add">
-                        <div class="idCard_img_box" v-if="basicInfo.frontIDCard">
-                            <img src="../../assets/img/logo.png">
+                        <div class="idCard_img_box" v-if="getIDCardPhoto[0]">
+                            <img :src="getIDCardPhoto[0]">
                             <div class="shade"></div>
-                            <van-icon name="clear" class="icon_close" @click="removePhoto(1)" />
+                            <van-icon name="clear" class="icon_close" @click="removePhoto(0)" />
                         </div>
                         <div class="idCard_img_box" v-else>
                             <p>+</p>
                             <span>正面照片</span>
                         </div>
-                        <CreateChooseImg @getCameraImg="frontIDCard"></CreateChooseImg>
+                        <CreateChooseImg @getCameraImg="getCameraImg" :getImgSub="0"></CreateChooseImg>
                     </div>
                     <div class="idCard_img_add">
-                        <div class="idCard_img_box" v-if="basicInfo.afterIDCard">
-                            <img src="../../assets/img/logo.png">
+                        <div class="idCard_img_box" v-if="getIDCardPhoto[1]">
+                            <img :src="getIDCardPhoto[1]">
                             <div class="shade"></div>
-                            <van-icon name="clear" class="icon_close" @click="removePhoto(2)" />
+                            <van-icon name="clear" class="icon_close" @click="removePhoto(1)" />
                         </div>
                         <div class="idCard_img_box" v-else>
                             <p>+</p>
                             <span>反面照片</span>
                         </div>
-                        <CreateChooseImg @getCameraImg="afterIDCard"></CreateChooseImg>
+                        <CreateChooseImg @getCameraImg="getCameraImg" :getImgSub="1"></CreateChooseImg>
                     </div>
                 </div>
             </div>
@@ -63,16 +64,16 @@
                 </div>
                 <div class="idCard_img">
                     <div class="idCard_img_add">
-                        <div class="idCard_img_box" v-if="basicInfo.holdIDCard">
-                            <img src="../../assets/img/logo.png">
+                        <div class="idCard_img_box" v-if="getIDCardPhoto[2]">
+                            <img :src="getIDCardPhoto[2]">
                             <div class="shade"></div>
-                            <van-icon name="clear" class="icon_close" @click="removePhoto(3)" />
+                            <van-icon name="clear" class="icon_close" @click="removePhoto(2)" />
                         </div>
                         <div class="idCard_img_box" v-else>
                             <p>+</p>
                             <span>手持身份证照</span>
                         </div>
-                        <CreateChooseImg @getCameraImg="holdIDCard"></CreateChooseImg>
+                        <CreateChooseImg @getCameraImg="getCameraImg" :getImgSub="2"></CreateChooseImg>
                     </div>
                     <div class="idCard_img_add clear"></div>
                 </div>

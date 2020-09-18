@@ -59,6 +59,9 @@ export default {
             }
             this.$router.replace(path);
         },
+        getRouteParams() {
+            return this.$route.query;
+        },
         getApiParams(obj) {
             const params = {};
             for (const key of Object.keys(obj)) {

@@ -1,12 +1,17 @@
-const SAVE_STEP = 'save_step';
+const SAVE_STATUS = 'save_status';
+const SAVE_STEP = 'save_channel';
 
 const state = {
-    step: ''
+    status: '',
+    channel: ''
 };
 
 const mutations = {
+    [SAVE_STATUS](state, { playload }) {
+        state.status = playload;
+    },
     [SAVE_STEP](state, { playload }) {
-        state.step = playload;
+        state.channel = playload;
     }
 };
 

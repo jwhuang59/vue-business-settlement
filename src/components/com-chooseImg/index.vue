@@ -1,9 +1,18 @@
 <template>
-	<div ref="camera_input"></div>
+	<div class="content">
+		<div ref="camera_input"></div>
+		<van-overlay :show="showLoading">
+			<van-loading type="spinner" color="#fff" class="loading" size="50" />
+		</van-overlay>
+	</div>
 </template>
 <script>
-	import { isWeixin,isMQQbrowser,isAndroid } from '@/commons/compatible'
+	import { Loading,Overlay } from 'vant';
 	export default {
+		components:{
+			[Loading.name]: Loading,
+			[Overlay.name]: Overlay,
+		},
 		name: 'CreateChooseImg',
 		props:{
 			getImgSub: {
@@ -13,18 +22,22 @@
 			getImgType: {
 				type: [Number],
 				default: 0
-			},	
+			},
 		},
 		data(){
 			return{
+				isUpload:false,
+				showLoading:false
 			}
 		},
 		methods: {
 			createUploadImgEle(e) {
+				const u = navigator.userAgent;
+				const ua = navigator.userAgent.toLowerCase();
 				const input = document.createElement('input');
 				input.type = 'file';
 				input.accept = 'image/*';
-				input.multiple = 'multiple';
+				// input.multiple = 'multiple'; // 选择多张
 				input.style.position = "absolute";
 				input.style.left = '0';
 				input.style.top = '0';
@@ -32,35 +45,45 @@
 				input.style.height = '100%';
 				input.style.overflow = "hidden";
 				input.style.opacity = 0;
-				input.onchange = (event) => {
-					// console.log(event)
-					// console.log(event.target.files);
-					const files = Array.prototype.slice.call(event.target.files);
-					// console.log(files)
-					// if (!files.length) return;
-					this.$emit('getCameraImg', {
-						img: event.target.files,
-						sub: this.getImgSub,
-						type: this.getImgType
-					});
-					// this.$emit('getImgSub', '');
-				}
-				try{
-					if (isAndroid() && isWeixin() && !isMQQbrowser()) {
-						input.capture = 'camera';
-					}
-				}catch(e){
-					console.log("创建原生input元素报错 ：",e);
+				if(ua.indexOf("Android") > -1 || ua.indexOf("Linux") > -1 && ua.indexOf(' qq/') > -1){
+					// 判断安卓qq
+					input.capture = 'camera';
 				}
 				this.$refs.camera_input.appendChild(input);
+				input.onchange = (e) => {
+					this.showLoading = true;
+					if(e.target.files.length === 0) return false ;
+					const formData = new FormData()
+					formData.append('image', e.target.files[0])
+					this.$request("uploadImage",formData).then((res) => {
+						this.$emit('getCameraImg', {
+							img: res.data.url,
+							sub: this.getImgSub,
+							type: this.getImgType
+						});
+						this.showLoading = false;
+					})
+	
+				}
+				
 			},
+			
 		},
 		mounted() {
 			this.createUploadImgEle();
-		}
+		},
 	}
 </script>
 <style lang="scss" scoped>
-
+.van-overlay{
+	background:rgba(0,0,0,0.7)
+}
+.loading{
+	font-size:30px;
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform: translate(-50%,-50%);
+}
 </style>
 

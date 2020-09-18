@@ -7,54 +7,58 @@
             <ul>
                 <li>
                     <label>营业执照名称*</label>
-                    <input type="text" placeholder="请输入营业执照名称" v-model="standardInfo.bankCardName" />
+                    <input disabled type="text" v-model="standardInfo.businessLicenseName" placeholder="请输入营业执照名称" />
                 </li>
                 <li>
                     <label>经营店铺名称*</label>
-                    <input type="text" placeholder="请输入经营店铺名称" v-model="standardInfo.bankCardNumber" />
+                    <input disabled type="text" v-model="standardInfo.shopName" placeholder="请输入经营店铺名称" />
                 </li>
                 <li>
                     <label>法定代表人*</label>
-                    <input type="text" placeholder="请输入法定代表人" v-model="standardInfo.bankCardDeposit" />
+                    <input disabled type="text" v-model="standardInfo.legalRepresentativeName" placeholder="请输入法定代表人" />
                 </li>
                 <li>
                     <label>营业执照地址*</label>
-                    <input type="text" placeholder="请输入营业执照地址" v-model="standardInfo.bankCardPhone" />
+                    <input disabled type="text" v-model="standardInfo.businessRegisteredAddress" placeholder="请输入营业执照地址" />
                 </li>
                 <li>
                     <label>统一信用代码*</label>
-                    <input type="text" placeholder="请输入统一信用代码" v-model="standardInfo.bankCardPhone" />
-                </li>
-                <li>
-                    <label>营业执照注册日期*</label>
-                    <input type="button" value="请选择营业执照注册日期" class="input_btn" @click="changeCalendar" data-id="1" />
-                    <van-icon name="arrow" class="icon_arrow" />
+                    <input disabled type="text" v-model="standardInfo.unifiedCreditCode" placeholder="请输入统一信用代码" />
                 </li>
                 <li>
                     <label>营业执照有效期*</label>
-                    <input type="button" value="请选择营业执照有效期" class="input_btn" @click="changeCalendar" data-id="2" />
+                    <input disabled type="text" v-model="standardInfo.businessTermValidity" placeholder="请选择营业执照注册日期" />
+                </li>
+                <li>
+                    <label>营业执照核准日期*</label>
+                    <input disabled type="text" v-model="standardInfo.businessApprovalTime" placeholder="请选择营业执照有效期" />
+                </li>
+                <!-- <li>
+                    <label>营业执照注册日期*</label>
+                    <input disabled type="button" value="请选择营业执照注册日期" class="input disabled_btn" @click="changeCalendar" data-id="1" />
+                    <van-icon name="arrow" class="icon_arrow" />
+                </li> -->
+                <!-- <li>
+                    <label>营业执照有效期*</label>
+                    <input disabled type="button" value="请选择营业执照有效期" class="input disabled_btn" @click="changeCalendar" data-id="2" />
                     <van-icon name="arrow" class="icon_arrow" />
                 </li>
                 <li>
                     <label>营业执照核准日期*</label>
-                    <input type="button" value="请选择营业执照核准日期" class="input_btn" @click="changeCalendar" data-id="3" />
+                    <input disabled type="button" value="请选择营业执照核准日期" class="input disabled_btn" @click="changeCalendar" data-id="3" />
                     <van-icon name="arrow" class="icon_arrow" />
-                </li>
+                </li> -->
                 <li>
                     <label>经营范围*</label>
-                    <div class="range_title">
-                        请选择经营范围 请选择经营范围 请选择经营范围 请选择经营范围 请选择经营范围 请选择经营范围 请选择经营范围 请选择经营范围 请选择经营范围 请选择经营范围 请选择经营范围 请选择经营范围
-                    </div>
+                    <div class="range_title">{{standardInfo.businessScope}}</div>
                 </li>
                 <li class="license_img">
                     <div class="license_title0">
                         <label>营业执照*</label>
-                        <p><span>0</span>/3</p>
+                        <!-- <p><span>{{standardInfo.businessLicensePhoto.length}}</span>/3</p> -->
                     </div>
                     <div class="license_photo">
-                        <img src="../../assets/img/logo.png">
-                        <img src="../../assets/img/logo.png">
-                        <img src="../../assets/img/logo.png">
+                        <img :src="item" v-for="(item,index) in standardInfo.businessLicensePhoto">
                     </div>
                 </li>
             </ul>
@@ -63,30 +67,32 @@
             <div class="license_title">
                 <h3>财务信息</h3>
             </div>
-            <ul>
+            <ul v-for="(item,index) in standardInfo.paymentList" :key="index">
                 <li>
                     <label>银行卡户名*</label>
-                    <input type="text" placeholder="请输入银行户名" v-model="standardInfo.bankCardName" />
+                    <input disabled type="text" placeholder="请输入银行户名" v-model="item.bankCardName" />
                 </li>
                 <li>
                     <label>银行卡号*</label>
-                    <input type="number" placeholder="请输入银行卡号" v-model="standardInfo.bankCardNumber" />
+                    <input disabled type="number" placeholder="请输入银行卡号" v-model="item.bankCardNumber" />
                 </li>
                 <li>
                     <label>银行开户行*</label>
-                    <input type="text" placeholder="请输入银行开户行" v-model="standardInfo.bankCardDeposit" />
+                    <input disabled type="text" placeholder="请输入银行开户行" v-model="item.bankCardDeposit" />
                 </li>
                 <li>
                     <label>银行预留手机号*</label>
-                    <input type="number" placeholder="请输入银行预留手机号" v-model="standardInfo.bankCardPhone" />
+                    <input disabled type="number" placeholder="请输入银行预留手机号" v-model="item.bankCardPhone" />
                 </li>
+            </ul>
+            <ul>
                 <li>
                     <label>支付宝账户*</label>
-                    <input type="number" placeholder="请输入支付宝账户" v-model="standardInfo.bankCardPhone" />
+                    <input disabled type="number" placeholder="请输入支付宝账户" v-model="standardInfo.alipayAccount" />
                 </li>
                 <li>
                     <label>微信商户号*</label>
-                    <input type="number" placeholder="请输入微信商户号" v-model="standardInfo.bankCardPhone" />
+                    <input disabled type="number" placeholder="请输入微信商户号" v-model="standardInfo.wechatMerchant" />
                 </li>
             </ul>
         </div>

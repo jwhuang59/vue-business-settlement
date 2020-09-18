@@ -9,12 +9,12 @@ files.keys().forEach(key => {
 
 const routes = [
     {
-        path: '',
+        path: '/index',
         component: () => import('@/views/index'),
         children: [
             {
                 name: 'basics',
-                path: '/',
+                path: '/basics',
                 component: () => import('@/views/basics'),
                 meta: {
                     title: '基础信息',
@@ -93,22 +93,22 @@ const routes = [
         ]
     },
     {
+        name: 'result',
+        path: '/',
+        component: () => import('@/views/result'),
+        meta: {
+            title: '店铺开通',
+            isBack: true,
+            keepAlive: false
+        }
+    },
+    {
         name: 'login',
         path: '/login',
         component: () => import('@/views/login'),
         meta: {
             title: '注册商家',
             style: 'style',
-            isBack: true,
-            keepAlive: false
-        }
-    },
-    {
-        name: 'result',
-        path: '/result',
-        component: () => import('@/views/result'),
-        meta: {
-            title: '店铺开通',
             isBack: true,
             keepAlive: false
         }

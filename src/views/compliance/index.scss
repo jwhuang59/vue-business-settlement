@@ -39,6 +39,17 @@
                     padding: 5px 0;
                     background: transparent
                 }
+                .icon_arrow {
+                    font-size: 15px;
+                    font-weight: bold;
+                    color: #999999
+                }
+                .calendar_btn {
+                    color: #999
+                }
+                .color {
+                    color: #666
+                }
                 .validity_wrapper {
                     flex: 1;
                     .validity_item {
@@ -71,10 +82,11 @@
                         flex-direction: row;
                         justify-content: space-between;
                         align-items: center;
-                        .icon_arrow {
-                            font-size: 15px;
-                            font-weight: bold;
-                            color: #999999
+                        .calendar_btn {
+                            color: #999
+                        }
+                        .color {
+                            color: #666
                         }
                     }
                 }
@@ -109,7 +121,7 @@
                     position: relative;
                     .license_img_add {
                         width: 31.2%;
-                        height: 80px;
+                        height: 90px;
                         position: relative;
                         background: #F8F8F8;
                         display: flex;

@@ -8,9 +8,10 @@
                 </template>
             </van-steps>
         </div>
-        <keep-alive>
+        <router-view></router-view>
+        <!-- <keep-alive>
             <router-view></router-view>
-        </keep-alive>
+        </keep-alive> -->
         <van-button type="default" @click="getProblem" v-show="$route.meta.isCommon">遇到问题 · 我要反馈</van-button>
     </div>
 </template>

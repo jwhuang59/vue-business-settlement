@@ -1,44 +1,42 @@
 <div class="container">
-    <div class="status_wrapper">
+    <div class="status_wrapper" v-if="shopStatus === 0">
+        <van-icon name="question" class="icon_clock" />
+        <h3>未处理</h3>
+        <p>暂未提交资料</p>
+    </div>
+    <div class="status_wrapper" v-if="shopStatus === 1">
         <van-icon name="clock" class="icon_clock" />
         <h3>等待处理</h3>
         <p>已提交资料，等待运营人员确认</p>
     </div>
+    <div class="status_wrapper" v-if="shopStatus === 2">
+        <van-icon name="checked" class="icon_clock" />
+        <h3>审核通过</h3>
+        <p>审核通过，请确认三方资料</p>
+    </div>
+    <div class="status_wrapper" v-if="shopStatus === 3">
+        <van-icon name="clear" class="icon_clock" />
+        <h3>审核驳回</h3>
+        <p>审核驳回，请重新提交资料</p>
+    </div>
     <div class="channel_menu">
-        <div class="channel_item" @click="toChannel">
-            <div class="item_left">
-                复用资质·开通美团渠道
+        <div class="channel_item" v-for="(item,index) in thirdInfo" @click="toChannel(item.thirdType)">
+            <div class="item_left">{{item.thirdText}}</div>
+            <div class="item_right" v-if="item.thirdStatus === 0">
+                <van-icon name="question" class="icon_question" />
+                <span>未处理</span>
             </div>
-            <div class="item_right">
+            <div class="item_right" v-if="item.thirdStatus === 1">
+                <van-icon name="clock" class="icon_clock" />
+                <span>审核中</span>
+            </div>
+            <div class="item_right" v-if="item.thirdStatus === 2">
                 <van-icon name="checked" class="icon_checked" />
                 <span>审核通过</span>
             </div>
-        </div>
-        <div class="channel_item">
-            <div class="item_left">
-                复用资质·开通饿了么渠道
-            </div>
-            <div class="item_right">
-                <van-icon name="clock" class="icon_clock" />
-                <span>处理中</span>
-            </div>
-        </div>
-        <div class="channel_item">
-            <div class="item_left">
-                复用资质·开通京东到家渠道
-            </div>
-            <div class="item_right">
+            <div class="item_right" v-if="item.thirdStatus === 3">
                 <van-icon name="clear" class="icon_clear" />
-                <span>驳回</span>
-            </div>
-        </div>
-        <div class="channel_item">
-            <div class="item_left">
-                复用资质·开通口碑渠道
-            </div>
-            <div class="item_right">
-                <van-icon name="question" class="icon_question" />
-                <span>未处理</span>
+                <span>审核驳回</span>
             </div>
         </div>
     </div>

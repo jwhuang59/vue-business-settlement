@@ -4,10 +4,10 @@ import apis from './modules';
 import { Notify } from 'vant';
 import { loading } from '@/commons/loading';
 
-const BaseUrl = process.env.VUE_APP_BASE;
+const BaseUrl = process.env.VUE_APP_BASE + '/thirdplatform';
 
 let httpCount = 0;
-
+const that = this;
 /**
  * 请求拦截器
  */
@@ -82,12 +82,13 @@ function successHandler(resp, resolve) {
     } else {
         if (resp.data.code === 200 || resp.config.pem) {
             resolve(resp.data);
-        } else if (resp.data.code === 401) {
+        } else if (resp.data.code === 204) {
             if (location.pathname !== '/login') {
                 location.href = '/login';
             }
         } else {
-            errorHandler(resp);
+            resolve(resp.data);
+            // errorHandler(resp);
         }
     }
 }

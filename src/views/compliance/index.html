@@ -9,7 +9,7 @@
                 <div class="license_photo">
                     <div class="license_img_add" v-for="(item,index) in complianceInfo.businessLicensePhoto" :key="index">
                         <div class="license_img_box" v-if="item">
-                            <img src="../../assets/img/logo.png">
+                            <img :src="item">
                             <div class="shade"></div>
                             <van-icon name="clear" class="icon_close" @click="removePhoto(index)" />
                         </div>
@@ -32,11 +32,11 @@
             </li>
             <li>
                 <label>法定代表人*</label>
-                <input type="number" placeholder="请输入法定代表人" v-model="complianceInfo.legalRepresentativeName" />
+                <input type="text" placeholder="请输入法定代表人" v-model="complianceInfo.legalRepresentativeName" />
             </li>
             <li>
                 <label>统一信用代码*</label>
-                <input type="text" placeholder="请输入统一信用代码" v-model="complianceInfo.creditCode" />
+                <input type="text" placeholder="请输入统一信用代码" v-model="complianceInfo.unifiedCreditCode" />
             </li>
             <li>
                 <label>注册地址*</label>
@@ -45,7 +45,7 @@
             <li class="validity_flex">
                 <label>有效期*</label>
                 <div class="validity_wrapper">
-                    <van-radio-group v-model="radio">
+                    <van-radio-group v-model="radio" @change="changeRadio">
                         <div class="validity_item">
                             <div class="item_left">
                                 <p>长期有效</p>
@@ -65,7 +65,7 @@
                             </div>
                         </div>
                         <div class="calendar_wrapper" v-if="radio === '2'">
-                            <input type="button" value="请选择有效期" class="calendar_btn" @click="changeCalendar" />
+                            <input type="button" :value="complianceInfo.businessTermValidityText" class="calendar_btn" @click="changeCalendar(1)" />
                             <van-icon name="arrow" class="icon_arrow" />
                         </div>
                     </van-radio-group>
@@ -73,14 +73,15 @@
             </li>
             <li>
                 <label>核准日期*</label>
-                <input type="text" placeholder="请输入营业执照核准日期（营业执照右下角）" v-model="complianceInfo.businessApprovalTime" />
+                <input type="button" :value="complianceInfo.businessApprovalTime" class="calendar_btn" @click="changeCalendar(2)" />
+                <van-icon name="arrow" class="icon_arrow" />
             </li>
             <li class="range_wrapper">
                 <label>经营范围</label>
-                <textarea type="text" placeholder="请输入营业范围" v-model="complianceInfo.businessScope"></textarea>
+                <textarea type="text" placeholder="请输入营业范围" v-model="complianceInfo.businessScope" maxlength="100"></textarea>
             </li>
         </ul>
     </div>
     <van-button type="primary" @click="nextStep">完成 · 并开通锅圈商城</van-button>
-    <van-calendar v-model="showCalendar" @confirm="getValidity" color="#31CF6E" />
+    <van-calendar v-model="showCalendar" @confirm="getValidity" color="#31CF6E" :min-date="minDate" :max-date="maxDate" />
 </div>

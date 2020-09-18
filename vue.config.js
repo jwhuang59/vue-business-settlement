@@ -3,15 +3,10 @@ module.exports = {
     devServer: {
         proxy: {
             '/api': {
-                target: 'http://192.168.10.234:1094',
+                target: 'http://172.17.8.5:1094',
                 changeOrigin: true,
                 pathRewrite: { '^/api': '/' }
             }
-            // '/request': {
-            //     target: 'https://test1-mndash.zzgqsh.com/kanban',
-            //     changeOrigin: true,
-            //     pathRewrite: { '^/request': '/' }
-            // }
         },
         port: 80
     },
@@ -23,3 +18,4 @@ module.exports = {
         }
     }
 };
+// target: 'http://172.17.8.5:1094',

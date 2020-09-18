@@ -2,7 +2,8 @@
 <template src="./index.html"></template>
 <style lang="scss" src="./index.scss" scoped></style>
 <script>
-import { Button,Icon,Dialog,Calendar,Picker,Popup } from 'vant';
+import { Button,Icon,Dialog,Calendar,Picker,Popup,Toast } from 'vant';
+
 export default {
     components:{
         [Button.name]: Button,
@@ -11,42 +12,139 @@ export default {
         [Dialog.name]: Dialog,
         [Calendar.name]: Calendar,
         [Popup.name]: Popup,
+        [Toast.name]: Toast,
     },
     data() {
         return {
-            licenceInfo:{
-                businessLicensePhoto:['']
-            },
+            licenceList:[{
+                licenseValidity : '请输入许可证结束日期',
+                licenseApprovalTime : '请输入许可证核准日期'
+            },{
+                licenseValidity : '请输入许可证结束日期',
+                licenseApprovalTime : '请输入许可证核准日期'
+            },{
+                licenseValidity : '请输入许可证结束日期',
+                licenseApprovalTime : '请输入许可证核准日期'
+            }],
             uploadPhotoNum:0,
+            showLicenceSub:0,
             calendar:false,
-            comCalendar:false,
+            calendarSub:0,
+            minDate:'',
+            maxDate:''
         };
     },
+    created() {
+        const year = this.dayjs().year();
+        const month = this.dayjs().month();
+        const date = this.dayjs().date();
+        this.minDate = new Date(year-10,month, date)
+        this.maxDate = new Date(year+10,month, date)
+    },
+    mounted(){
+        this.getLicenseInfo()
+    },
     methods:{
-        addPhoto() {
-            this.licenceInfo.businessLicensePhoto.push('');
+        getLicenseInfo(){
+            this.$request("getLicenseInfo").then((res) => {
+                if(res.data.licenceList.length === 0) return false
+                this.uploadPhotoNum = 3
+                const licenceList = res.data.licenceList
+                for(const i in licenceList){
+                    this.licenceList[i].licensePhoto = licenceList[i].licensePhoto
+                    this.licenceList[i].licenseTypeName = licenceList[i].licenseTypeName
+                    this.licenceList[i].licenseNumber = licenceList[i].licenseNumber
+                    this.licenceList[i].licenseRegistrationAddress = licenceList[i].licenseRegistrationAddress
+                    this.licenceList[i].licenseValidity = licenceList[i].licenseValidity
+                    this.licenceList[i].licenseApprovalTime = licenceList[i].licenseApprovalTime
+                    this.licenceList[i].licenseValidity = licenceList[i].licenseValidity ? licenceList[i].licenseValidity : '请输入许可证结束日期'
+                    this.licenceList[i].licenseApprovalTime = licenceList[i].licenseApprovalTime ? licenceList[i].licenseApprovalTime : '请输入许可证核准日期'
+                    this.licenceList[i].remark = licenceList[i].remark
+                }
+            })
+        },
+        switchLicence(i){
+            this.showLicenceSub = i
         },
         removePhoto(i){
             this.uploadPhotoNum--;
-            this.licenceInfo.businessLicensePhoto.splice(i,1);
+            this.licenceList[i].licensePhoto = ''
         },
-        getValidity(){
-
-        },
-        showCalendar(){
+        showCalendar(i){
+            this.calendarSub = i
             this.calendar = true;
         },
-        changeCalendar(){
-
+        getValidity(e){
+            const getDate = this.dayjs(e).format('YYYY-MM-DD')
+            switch(this.calendarSub){
+                case 1:
+                    this.licenceList[this.showLicenceSub].licenseValidity = getDate
+                    break;
+                case 2:
+                    this.licenceList[this.showLicenceSub].licenseApprovalTime = getDate
+                    break;
+            }
+            this.calendar = false;
         },
         getCameraImg(data){
             this.uploadPhotoNum++;
-            this.$set(this.licenceInfo.businessLicensePhoto,data.sub,data.img)
+            this.$set(this.licenceList[data.sub],'licensePhoto',data.img)
         },
         nextStep(){
-            this.jump('perfect');
+            console.log(this.licenceList)
+            for(const i in this.licenceList){
+                if(this.licenceList[i].licensePhoto === "" || this.licenceList[i].licensePhoto === undefined || this.licenceList[i].licensePhoto === null){
+                    Dialog.alert({message: '请上传许可证照片'});
+                    return false;
+
+                }else if(this.licenceList[i].licenseTypeName === "" || this.licenceList[i].licenseTypeName === undefined || this.licenceList[i].licenseTypeName === null){
+                    Dialog.alert({message: '请输入执照类型名称'});
+                    return false;
+
+                }else if(this.licenceList[i].licenseNumber === "" || this.licenceList[i].licenseNumber === undefined || this.licenceList[i].licenseNumber === null){
+                    Dialog.alert({message: '请输入许可证编码'});
+                    return false;
+
+                }else if(this.licenceList[i].licenseRegistrationAddress === "" || this.licenceList[i].licenseRegistrationAddress === undefined || this.licenceList[i].licenseRegistrationAddress === null){
+                    Dialog.alert({message: '请输入许可证注册地址'});
+                    return false;
+
+                }else if(this.licenceList[i].licenseValidity === "" || this.licenceList[i].licenseValidity === undefined || this.licenceList[i].licenseValidity === null){
+                    Dialog.alert({message: '请输入许可证有效日期'});
+                    return false;
+
+                }else if(this.licenceList[i].licenseApprovalTime === "" || this.licenceList[i].licenseApprovalTime === undefined || this.licenceList[i].licenseApprovalTime === null){
+                    Dialog.alert({message: '请输入许可证签发日期'});
+                    return false;
+
+                }             
+            }
+            Dialog.confirm({
+                title: '提示',
+                message: '是否保存下一步',
+            }).then(() => {
+                this.$request("updateLicenseInfo",{
+                    "licenceList":this.licenceList
+                }).then((res) => { 
+                    if(res.data){
+                        Toast.success({
+                            message:'保存成功',
+                            duration:3000,
+                            forbidClick:true,
+                        });
+                        setTimeout(() => {this.jump('perfect');},3000)
+                    }else{
+                        Toast.fail({
+                            message:'保存失败',
+                            duration:3000,
+                            forbidClick:true,
+                        });
+                    } 
+                })
+            }).catch(() => {})
         },
         getProblem(){
+            
             this.jump('problem');
         }
     },

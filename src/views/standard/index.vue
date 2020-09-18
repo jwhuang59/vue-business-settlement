@@ -2,7 +2,7 @@
 <template src="./index.html"></template>
 <style lang="scss" src="./index.scss" scoped></style>
 <script>
-import { Button,Icon,Dialog,Calendar,Picker,Popup } from 'vant';
+import { Button,Icon,Dialog,Calendar,Picker,Popup,Toast } from 'vant';
 export default {
     components:{
         [Button.name]: Button,
@@ -11,6 +11,7 @@ export default {
         [Dialog.name]: Dialog,
         [Calendar.name]: Calendar,
         [Popup.name]: Popup,
+        [Toast.name]: Toast
     },
     data() {
         return {
@@ -21,13 +22,27 @@ export default {
             rangeColumns:['123','456']
         };
     },
-    onLoad() {
-        this.$store.commit({
-            type: 'save_step',
-            playload: this.active || 0
-        });
+    mounted() {
+        this.getStandard()
     },
     methods:{
+        getStandard(){
+            this.$request("getStandardInfo").then((res) => {
+                this.standardInfo.businessLicenseName = res.data.businessLicenseName
+                this.standardInfo.shopName = res.data.shopName
+                this.standardInfo.legalRepresentativeName = res.data.legalRepresentativeName
+                this.standardInfo.businessRegisteredAddress = res.data.businessRegisteredAddress
+                this.standardInfo.unifiedCreditCode = res.data.unifiedCreditCode
+                this.$set(this.standardInfo,'businessTermValidity',res.data.businessTermValidity === "1" ? "永久有效" : res.data.businessTermValidity)
+                this.standardInfo.businessApprovalTime = res.data.businessApprovalTime
+                this.standardInfo.businessScope = res.data.businessScope
+                this.standardInfo.businessLicensePhoto = res.data.businessLicensePhoto
+                this.standardInfo.paymentList = res.data.paymentList
+                this.standardInfo.alipayAccount = res.data.alipayAccount
+                this.standardInfo.wechatMerchant = res.data.wechatMerchant
+
+            })
+        },
         cancelPicker(){
             this.showPicker = false;
         },
@@ -51,7 +66,18 @@ export default {
             this.showCalendar = true;
         },
         nextStep(){
-            this.jump('licence');
+            Dialog.confirm({
+                title: '提示',
+                message: '是否确认无误·继续补充',
+            }).then(() => {
+                Toast.success({
+                    message:'保存成功',
+                    duration:3000,
+                    forbidClick:true,
+                });
+                setTimeout(() => {this.jump('licence');},3000)
+            }).catch(() => {})
+            
         },
         getProblem(){
             this.jump('problem');

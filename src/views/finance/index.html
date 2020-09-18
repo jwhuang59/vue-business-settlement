@@ -13,7 +13,7 @@
             </li>
             <li>
                 <label>微信商户号*</label>
-                <input type="number" placeholder="请输入微信商户号" v-model="financeInfo.wechatMerchant" />
+                <input type="text" placeholder="请输入微信商户号" v-model="financeInfo.wechatMerchant" />
                 <van-icon name="question-o" class="icon_question" @click="showNotes" data-notes="微信商户账号" />
             </li>
         </ul>
@@ -25,19 +25,19 @@
             <ol v-for="(item,index) in financeInfo.paymentList" :key="index">
                 <li>
                     <label>银行卡户名*</label>
-                    <input type="text" placeholder="请输入银行卡户名" v-model="financeInfo.bankCardName" />
+                    <input type="text" placeholder="请输入银行卡户名" v-model="item.bankCardName" />
                 </li>
                 <li>
                     <label>银行卡号*</label>
-                    <input type="number" placeholder="请输入银行卡号" v-model="financeInfo.bankCardNumber" />
+                    <input type="number" placeholder="请输入银行卡号" v-model="item.bankCardNumber" />
                 </li>
                 <li>
                     <label>开户行*</label>
-                    <input type="text" placeholder="请输入银行开户行" v-model="financeInfo.bankCardDeposit" />
+                    <input type="text" placeholder="请输入银行开户行" v-model="item.bankCardDeposit" />
                 </li>
                 <li>
                     <label>手机号码*</label>
-                    <input type="number" placeholder="请输入银行卡绑定手机号" v-model="financeInfo.bankCardPhone" />
+                    <input type="number" placeholder="请输入银行卡绑定手机号" v-model="item.bankCardPhone" />
                 </li>
                 <li class="remove" v-if="index>0" @click="removePayment">
                     <van-icon name="close" class="close_btn" />

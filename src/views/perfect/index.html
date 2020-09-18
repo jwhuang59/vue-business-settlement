@@ -8,7 +8,7 @@
             <div class="license_photo">
                 <div class="license_img_add" v-for="(imgs,i) in item.uploadPhotoMenu" :key="i">
                     <div class="license_img_box" v-if="imgs">
-                        <img src="../../assets/img/logo.png">
+                        <img :src="imgs">
                         <div class="shade"></div>
                         <van-icon name="clear" class="icon_close" @click="removePhoto(index,i)" />
                     </div>
