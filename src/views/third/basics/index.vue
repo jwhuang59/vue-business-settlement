@@ -2,6 +2,7 @@
 <style lang="scss" src="./index.scss" scoped></style>
 <script>
 import { Picker, Button, Icon, Popup, Dialog, Uploader, Toast } from 'vant';
+import validateIdCard from './validateIdCard.js';
 const regPhone = new RegExp(/^[1][3,4,5,6,7,8,9][0-9]{9}$/);
 export default {
     components: {
@@ -69,6 +70,7 @@ export default {
         },
         getBasicInfo() {
             this.$request('getBasicInfo').then(res => {
+                if(!res.data.afterIDCard) return false
                 this.basicInfo.storeName = res.data.storeName;
                 this.basicInfo.storePhone = res.data.storePhone;
                 this.basicInfo.province = res.data.province;
@@ -77,9 +79,9 @@ export default {
                 this.basicInfo.areaText = res.data.areaText;
                 this.basicInfo.storeAddress = res.data.storeAddress;
                 this.basicInfo.idCardNumber = res.data.idCardNumber;
-                this.basicInfo.frontIDCard = res.data.frontIDCard;
-                this.basicInfo.afterIDCard = res.data.afterIDCard;
-                this.basicInfo.holdIDCard = res.data.holdIDCard;
+                this.basicInfo.frontIDCard = this.getNameByUrl(res.data.frontIDCard);
+                this.basicInfo.afterIDCard = this.getNameByUrl(res.data.afterIDCard);
+                this.basicInfo.holdIDCard = this.getNameByUrl(res.data.holdIDCard);
                 this.getIDCardPhoto = [res.data.frontIDCard, res.data.afterIDCard, res.data.holdIDCard];
             });
         },
@@ -111,15 +113,15 @@ export default {
         getCameraImg(data) {
             switch (data.sub) {
                 case 0:
-                    this.basicInfo.frontIDCard = data.img;
+                    this.basicInfo.frontIDCard = data.name;
                     this.$set(this.getIDCardPhoto, 0, data.img);
                     break;
                 case 1:
-                    this.basicInfo.afterIDCard = data.img;
+                    this.basicInfo.afterIDCard = data.name;
                     this.$set(this.getIDCardPhoto, 1, data.img);
                     break;
                 case 2:
-                    this.basicInfo.holdIDCard = data.img;
+                    this.basicInfo.holdIDCard = data.name;
                     this.$set(this.getIDCardPhoto, 2, data.img);
                     break;
             }
@@ -128,17 +130,24 @@ export default {
             switch (index) {
                 case 0:
                     this.basicInfo.frontIDCard = '';
+                    this.basicInfo.frontImgIDCard = '';
                     this.$set(this.getIDCardPhoto, 0, '');
                     break;
                 case 1:
                     this.basicInfo.afterIDCard = '';
+                    this.basicInfo.afterImgIDCard = '';
                     this.$set(this.getIDCardPhoto, 1, '');
                     break;
                 case 2:
                     this.basicInfo.holdIDCard = '';
+                    this.basicInfo.holdImgIDCard = '';
                     this.$set(this.getIDCardPhoto, 2, '');
                     break;
             }
+        },
+        getNameByUrl(url) {
+            const formatUrl = url.split('?')[0].split('/');
+            return formatUrl[3] + '/' + formatUrl[4];
         },
         nextStep() {
             if (
@@ -199,6 +208,7 @@ export default {
                     message: '是否保存下一步'
                 })
                     .then(() => {
+                        
                         this.$request('updateBasicInfo', this.basicInfo)
                             .then(res => {
                                 if (res.data) {

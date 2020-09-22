@@ -59,6 +59,7 @@ export default {
                     .then(res => {
                         this.$emit('getCameraImg', {
                             img: res.data.url,
+                            name: res.data.objectName,
                             sub: this.getImgSub,
                             type: this.getImgType
                         });

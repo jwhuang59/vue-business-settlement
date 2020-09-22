@@ -21,6 +21,7 @@ export default {
                 businessTermValidityText: '请选择营业执照有效期',
                 businessApprovalTime: '请选择营业执照核准日期'
             },
+            uploadFileImg:[''],
             uploadPhotoNum: 0,
             calendarSub: '',
             showCalendar: false,
@@ -40,8 +41,8 @@ export default {
         getComplianceInfo() {
             this.$request('getComplianceInfo').then(res => {
                 if (res.data.businessLicensePhoto) {
-                    this.complianceInfo.businessLicensePhoto =
-                        res.data.businessLicensePhoto.length > 0 ? res.data.businessLicensePhoto : [''];
+                    this.uploadFileImg = res.data.businessLicensePhoto
+                    this.complianceInfo.businessLicensePhoto = this.getNameByUrl(res.data.businessLicensePhoto)
                     this.complianceInfo.businessLicenseName = res.data.businessLicenseName;
                     this.complianceInfo.legalRepresentativeName = res.data.legalRepresentativeName;
                     this.complianceInfo.unifiedCreditCode = res.data.unifiedCreditCode;
@@ -51,6 +52,7 @@ export default {
                         this.radio = '2';
                         this.complianceInfo.businessTermValidity = res.data.businessTermValidity;
                         this.complianceInfo.businessTermValidityText = res.data.businessTermValidity;
+                        
                     } else {
                         this.radio = '1';
                         this.complianceInfo.businessTermValidity = '1';
@@ -68,14 +70,15 @@ export default {
         },
         addPhoto() {
             this.complianceInfo.businessLicensePhoto.push('');
+            this.uploadFileImg.push('');
         },
         removePhoto(i) {
             this.uploadPhotoNum--;
             this.complianceInfo.businessLicensePhoto.splice(i, 1);
+            this.uploadFileImg.splice(i, 1);
         },
         changeRadio(e) {
             this.complianceInfo.businessTermValidity = e;
-            this.complianceInfo.businessTermValidityText = '请选择营业执照有效期';
         },
         getValidity(e) {
             const getDate = this.dayjs(e).format('YYYY-MM-DD');
@@ -92,7 +95,16 @@ export default {
         },
         getCameraImg(data) {
             this.uploadPhotoNum++;
-            this.$set(this.complianceInfo.businessLicensePhoto, data.sub, data.img);
+            this.$set(this.uploadFileImg, data.sub, data.img);
+            this.$set(this.complianceInfo.businessLicensePhoto, data.sub, data.name);
+        },
+        getNameByUrl(urlArr) {
+            const newNameByUrl = [];
+            urlArr.map((item,index) => {
+                const formatUrl = item.split('?')[0].split('/');
+                newNameByUrl[index] = formatUrl[3] + '/' + formatUrl[4];
+            })
+            return newNameByUrl
         },
         nextStep() {
             if (this.complianceInfo.businessLicensePhoto.length < 0) {

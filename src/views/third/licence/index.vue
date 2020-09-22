@@ -29,6 +29,7 @@ export default {
                     licenseApprovalTime: '请输入许可证核准日期'
                 }
             ],
+            uploadFileImg:['','',''],
             uploadPhotoNum: 0,
             showLicenceSub: 0,
             calendar: false,
@@ -51,7 +52,8 @@ export default {
                 this.uploadPhotoNum = 3;
                 const licenceList = res.data.licenceList;
                 for (const i in licenceList) {
-                    this.licenceList[i].licensePhoto = licenceList[i].licensePhoto;
+                    this.licenceList[i].licensePhoto = this.getNameByUrl(licenceList[i].licensePhoto);
+                    this.uploadFileImg[i] = licenceList[i].licensePhoto
                     this.licenceList[i].licenseTypeName = licenceList[i].licenseTypeName;
                     this.licenceList[i].licenseNumber = licenceList[i].licenseNumber;
                     this.licenceList[i].licenseRegistrationAddress = licenceList[i].licenseRegistrationAddress;
@@ -60,7 +62,7 @@ export default {
                     this.licenceList[i].licenseValidity = licenceList[i].licenseValidity;
                     this.licenceList[i].licenseApprovalTime = licenceList[i].licenseApprovalTime;
                     this.licenceList[i].remark = licenceList[i].remark;
-                }
+                } 
             });
         },
         switchLicence(i) {
@@ -69,6 +71,7 @@ export default {
         removePhoto(i) {
             this.uploadPhotoNum--;
             this.licenceList[i].licensePhoto = '';
+            this.uploadFileImg[i] = '';
         },
         showCalendar(i) {
             this.calendarSub = i;
@@ -88,7 +91,13 @@ export default {
         },
         getCameraImg(data) {
             this.uploadPhotoNum++;
-            this.$set(this.licenceList[data.sub], 'licensePhoto', data.img);
+            this.$set(this.licenceList[data.sub], 'licensePhoto', data.name);
+            this.$set(this.uploadFileImg, data.sub, data.img);
+            console.log(this.uploadFileImg)
+        },
+        getNameByUrl(url) {
+            const formatUrl = url.split('?')[0].split('/');
+            return formatUrl[3] + '/' + formatUrl[4];
         },
         nextStep() {
             for (const i in this.licenceList) {

@@ -6,7 +6,7 @@
                 <p><span>{{item.uploadPhotoNum}}</span>/{{item.photoNum}}</p>
             </div>
             <div class="license_photo">
-                <div class="license_img_add" v-for="(imgs,i) in item.uploadPhotoMenu" :key="i">
+                <div class="license_img_add" v-for="(imgs,i) in item.uploadFileImg" :key="i">
                     <div class="license_img_box" v-if="imgs">
                         <img :src="imgs">
                         <div class="shade"></div>
@@ -18,7 +18,7 @@
                     </div>
                     <CreateChooseImg @getCameraImg="getCameraImg" :getImgType="index" :getImgSub="i"></CreateChooseImg>
                 </div>
-                <div class="license_img_add" v-if="item.uploadPhotoMenu.length<item.photoNum" @click="addPhoto(index)">
+                <div class="license_img_add" v-if="item.uploadFileImg.length<item.photoNum" @click="addPhoto(index)">
                     <div class="license_img_box">
                         <label>＋</label>
                     </div>

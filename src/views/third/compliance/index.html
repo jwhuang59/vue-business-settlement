@@ -7,7 +7,7 @@
                     <p><span>{{uploadPhotoNum}}</span>/3</p>
                 </div>
                 <div class="license_photo">
-                    <div class="license_img_add" v-for="(item,index) in complianceInfo.businessLicensePhoto" :key="index">
+                    <div class="license_img_add" v-for="(item,index) in uploadFileImg" :key="index">
                         <div class="license_img_box" v-if="item">
                             <img :src="item">
                             <div class="shade"></div>

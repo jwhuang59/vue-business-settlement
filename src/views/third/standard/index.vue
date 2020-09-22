@@ -26,6 +26,7 @@ export default {
     },
     methods: {
         getStandard() {
+
             this.$request('getStandardInfo').then(res => {
                 this.standardInfo.businessLicenseName = res.data.businessLicenseName;
                 this.standardInfo.shopName = res.data.shopName;

@@ -16,19 +16,22 @@ export default {
                     title: '法人健康证*',
                     photoNum: 1,
                     uploadPhotoNum: 0,
-                    uploadPhotoMenu: ['']
+                    uploadPhotoMenu: [''],
+                    uploadFileImg: [''],
                 },
                 {
                     title: '门头照片*',
                     photoNum: 6,
                     uploadPhotoNum: 0,
-                    uploadPhotoMenu: ['']
+                    uploadPhotoMenu: [''],
+                    uploadFileImg: [''],
                 },
                 {
                     title: '店内照片*',
                     photoNum: 6,
                     uploadPhotoNum: 0,
-                    uploadPhotoMenu: ['']
+                    uploadPhotoMenu: [''],
+                    uploadFileImg: [''],
                 }
             ]
         };
@@ -39,24 +42,38 @@ export default {
     methods: {
         getPerfectInfo() {
             this.$request('getPerfectInfo').then(res => {
+                if(res.data.healthPhoto[0] === '') return false;
                 this.perfectMenu[0].uploadPhotoNum = res.data.healthPhoto.length;
-                this.perfectMenu[0].uploadPhotoMenu = res.data.healthPhoto;
+                this.perfectMenu[0].uploadPhotoMenu = this.getNameByUrl(res.data.healthPhoto);
+                this.perfectMenu[0].uploadFileImg = res.data.healthPhoto;
                 this.perfectMenu[1].uploadPhotoNum = res.data.doorheadPhoto.length;
-                this.perfectMenu[1].uploadPhotoMenu = res.data.doorheadPhoto;
+                this.perfectMenu[1].uploadPhotoMenu = this.getNameByUrl(res.data.doorheadPhoto);
+                this.perfectMenu[1].uploadFileImg = res.data.doorheadPhoto;
                 this.perfectMenu[2].uploadPhotoNum = res.data.storePhoto.length;
-                this.perfectMenu[2].uploadPhotoMenu = res.data.storePhoto;
+                this.perfectMenu[2].uploadPhotoMenu = this.getNameByUrl(res.data.storePhoto);
+                this.perfectMenu[2].uploadFileImg = res.data.storePhoto;
             });
         },
         getCameraImg(data) {
             this.perfectMenu[data.type].uploadPhotoNum++;
-            this.$set(this.perfectMenu[data.type].uploadPhotoMenu, data.sub, data.img);
+            this.$set(this.perfectMenu[data.type].uploadPhotoMenu, data.sub, data.name);
+            this.$set(this.perfectMenu[data.type].uploadFileImg, data.sub, data.img);
         },
         addPhoto(t) {
-            this.perfectMenu[t].uploadPhotoMenu.push('');
+            this.perfectMenu[t].uploadFileImg.push('');
         },
         removePhoto(t, i) {
             this.perfectMenu[t].uploadPhotoNum--;
             this.perfectMenu[t].uploadPhotoMenu.splice(i, 1);
+            this.perfectMenu[t].uploadFileImg.splice(i, 1);
+        },
+        getNameByUrl(urlArr) {
+            const newNameByUrl = [];
+            urlArr.map((item,index) => {
+                const formatUrl = item.split('?')[0].split('/');
+                newNameByUrl[index] = formatUrl[3] + '/' + formatUrl[4];
+            })
+            return newNameByUrl
         },
         nextStep() {
             if (

@@ -8,7 +8,7 @@ export default [
     {
         /** 上传图片 */
         name: 'uploadImage',
-        url: '/thirdplatform/common/uploadImage',
+        url: '/thirdplatform/common/uploadPrivateImage',
         method: 'post',
         pem: true
     },
