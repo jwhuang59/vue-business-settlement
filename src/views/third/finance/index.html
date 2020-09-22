@@ -46,7 +46,7 @@
         </div>
     </div>
     <van-button type="primary" @click="nextStep">保存 · 下一步</van-button>
-    <van-popup v-model="showPicker" position="bottom">
+    <van-popup v-model="showPicker" position="bottom" :style="{ height: '30%' }">
         <van-picker show-toolbar title="收银系统" :columns="cashierColumns" @cancel="cancelPicker" @confirm="confirmPicker" ref="picker" />
     </van-popup>
 

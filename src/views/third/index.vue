@@ -22,17 +22,6 @@
 .template {
     padding-bottom: 20px;
 }
-.step_wrapper{
-    width:1000px
-}
-.step_item{
-    font-size:50px !important;
-    padding-left:-50px;
-}
-.van-step__icon{
-     font-size:50px !important;
-    height:100px !important;
-}
 .header {
     width: 90%;
     background: #f8f8f8;
