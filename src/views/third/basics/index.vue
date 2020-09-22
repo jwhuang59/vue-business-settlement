@@ -99,10 +99,10 @@ export default {
                     this.basicInfo.province = item.regionId;
                     this.cityList[one].children.map((item, two) => {
                         if (item.text === e[1]) {
-                            this.basicInfo.country = item.regionId;
+                            this.basicInfo.city = item.regionId;
                             this.cityList[one].children[two].children.map((item, three) => {
                                 if (item.text === e[2]) {
-                                    this.basicInfo.city = item.regionId;
+                                    this.basicInfo.country = item.regionId;
                                 }
                             });
                         }
@@ -150,6 +150,7 @@ export default {
             return formatUrl[3] + '/' + formatUrl[4];
         },
         nextStep() {
+            console.log(this.basicInfo)
             if (
                 this.basicInfo.storeName === '' ||
                 this.basicInfo.storeName === undefined ||
