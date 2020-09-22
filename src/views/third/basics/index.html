@@ -3,31 +3,31 @@
     <div class="form_wrapper">
         <ul>
             <li>
-                <label>门店名称*</label>
+                <label>门店名称<i>*</i></label>
                 <input type="text" placeholder="请输入门店名称" v-model="basicInfo.storeName" maxlength="50" />
             </li>
             <li>
-                <label>联系电话*</label>
+                <label>联系电话<i>*</i></label>
                 <input type="number" placeholder="请输入正确的联系电话" v-model="basicInfo.storePhone" />
             </li>
             <li>
-                <label>地区*</label>
+                <label>地区<i>*</i></label>
                 <input type="button" :value="basicInfo.areaText" :class="[basicInfo.province ? 'color' : '','map_btn']" @click="changePicker" />
                 <van-icon name="arrow" class="icon_arrow" />
             </li>
             <li>
-                <label>详细地址*</label>
+                <label>详细地址<i>*</i></label>
                 <input type="text" placeholder="街道门牌号等信息" v-model="basicInfo.storeAddress" />
             </li>
             <li>
-                <label>身份证号码*</label>
+                <label>身份证号码<i>*</i></label>
                 <input type="text" placeholder="请输入身份证号码" v-model="basicInfo.idCardNumber" />
             </li>
         </ul>
         <div class="idCard_wrapper">
             <div class="idCard_info">
                 <div class="wrapper_text">
-                    <label>上传身份证*</label>
+                    <label>上传身份证<i>*</i></label>
                     <p>照片须为身份证证件照，身份证号须清晰可见</p>
                 </div>
                 <div class="idCard_img">
@@ -59,7 +59,7 @@
             </div>
             <div class="idCard_info">
                 <div class="wrapper_text">
-                    <label>手持身份证照*</label>
+                    <label>手持身份证照<i>*</i></label>
                     <p>照片须为手持身份证半身照，身份证号须清晰可见</p>
                 </div>
                 <div class="idCard_img">

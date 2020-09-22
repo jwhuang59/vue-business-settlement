@@ -2,7 +2,7 @@
     <div class="form_wrapper">
         <div class="license_wrapper">
             <div class="license_title">
-                <label>许可证*</label>
+                <label>许可证<i>*</i></label>
                 <p><span>{{uploadPhotoNum}}</span>/3</p>
             </div>
             <div class="license_photo">
@@ -24,24 +24,24 @@
     <div class="form_info">
         <ul v-for="(item,index) in licenceList" :key="index" v-if="showLicenceSub === index">
             <li>
-                <label>执照类型名称*</label>
+                <label>执照类型名称<i>*</i></label>
                 <input type="text" placeholder="请输入执照类型名称" v-model="item.licenseTypeName" />
             </li>
             <li>
-                <label>许可证编码*</label>
+                <label>许可证编码<i>*</i></label>
                 <input type="text" placeholder="请输入许可证编码" v-model="item.licenseNumber" />
             </li>
             <li>
-                <label>注册地址*</label>
+                <label>注册地址<i>*</i></label>
                 <input type="text" placeholder="注册地址" v-model="item.licenseRegistrationAddress" />
             </li>
             <li>
-                <label>有效期至*</label>
+                <label>有效期至<i>*</i></label>
                 <input type="button" v-model="item.licenseValidity" class="input_btn" @click="showCalendar(1)" />
                 <van-icon name="arrow" class="icon_arrow" />
             </li>
             <li>
-                <label>签发日期*</label>
+                <label>签发日期<i>*</i></label>
                 <input type="button" v-model="item.licenseApprovalTime" class="input_btn" @click="showCalendar(2)" />
                 <van-icon name="arrow" class="icon_arrow" />
             </li>

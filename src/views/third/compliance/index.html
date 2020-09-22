@@ -3,7 +3,7 @@
         <ul>
             <li class="license_wrapper">
                 <div class="license_title">
-                    <label>营业执照*</label>
+                    <label>营业执照<i>*</i></label>
                     <p><span>{{uploadPhotoNum}}</span>/3</p>
                 </div>
                 <div class="license_photo">
@@ -27,23 +27,23 @@
                 </div>
             </li>
             <li>
-                <label>营业执照名称*</label>
+                <label>营业执照名称<i>*</i></label>
                 <input type="text" placeholder="请输入营业执照名称" v-model="complianceInfo.businessLicenseName" />
             </li>
             <li>
-                <label>法定代表人*</label>
+                <label>法定代表人<i>*</i></label>
                 <input type="text" placeholder="请输入法定代表人" v-model="complianceInfo.legalRepresentativeName" />
             </li>
             <li>
-                <label>统一信用代码*</label>
+                <label>统一信用代码<i>*</i></label>
                 <input type="text" placeholder="请输入统一信用代码" v-model="complianceInfo.unifiedCreditCode" />
             </li>
             <li>
-                <label>注册地址*</label>
+                <label>注册地址<i>*</i></label>
                 <input type="text" placeholder="请输入营业执照注册地址" v-model="complianceInfo.businessRegisteredAddress" />
             </li>
             <li class="validity_flex">
-                <label>有效期*</label>
+                <label>有效期<i>*</i></label>
                 <div class="validity_wrapper">
                     <van-radio-group v-model="radio" @change="changeRadio">
                         <div class="validity_item">
@@ -72,7 +72,7 @@
                 </div>
             </li>
             <li>
-                <label>核准日期*</label>
+                <label>核准日期<i>*</i></label>
                 <input type="button" :value="complianceInfo.businessApprovalTime" class="calendar_btn" @click="changeCalendar(2)" />
                 <van-icon name="arrow" class="icon_arrow" />
             </li>

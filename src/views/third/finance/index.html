@@ -2,41 +2,41 @@
     <div class="form_wrapper">
         <ul>
             <li>
-                <label>收银系统*</label>
+                <label>收银系统<i>*</i></label>
                 <input type="button" :value="financeInfo.cashierSystemCn" :class="[financeInfo.cashierSystem !== '' ? 'color' : '','cashier_btn']" @click="changePicker" />
                 <van-icon name="arrow" class="icon_arrow" />
             </li>
             <li>
-                <label>支付宝账号*</label>
+                <label>支付宝账号<i>*</i></label>
                 <input type="text" placeholder="请输入支付宝账户" v-model="financeInfo.alipayAccount" />
                 <van-icon name="question-o" class="icon_question" @click="showNotes" data-notes="支付宝账号" />
             </li>
             <li>
-                <label>微信商户号*</label>
+                <label>微信商户号<i>*</i></label>
                 <input type="text" placeholder="请输入微信商户号" v-model="financeInfo.wechatMerchant" />
                 <van-icon name="question-o" class="icon_question" @click="showNotes" data-notes="微信商户账号" />
             </li>
         </ul>
         <div class="makeMoney_wrapper">
             <div class="makeMoney_title">
-                <h3>收款方式*</h3>
+                <h3>收款方式<i>*</i></h3>
                 <span @click="addPayment">新增收款方</span>
             </div>
             <ol v-for="(item,index) in financeInfo.paymentList" :key="index">
                 <li>
-                    <label>银行卡户名*</label>
+                    <label>银行卡户名<i>*</i></label>
                     <input type="text" placeholder="请输入银行卡户名" v-model="item.bankCardName" />
                 </li>
                 <li>
-                    <label>银行卡号*</label>
+                    <label>银行卡号<i>*</i></label>
                     <input type="number" placeholder="请输入银行卡号" v-model="item.bankCardNumber" />
                 </li>
                 <li>
-                    <label>开户行*</label>
+                    <label>开户行<i>*</i></label>
                     <input type="text" placeholder="请输入银行开户行" v-model="item.bankCardDeposit" />
                 </li>
                 <li>
-                    <label>手机号码*</label>
+                    <label>手机号码<i>*</i></label>
                     <input type="number" placeholder="请输入银行卡绑定手机号" v-model="item.bankCardPhone" />
                 </li>
                 <li class="remove" v-if="index>0" @click="removePayment">
