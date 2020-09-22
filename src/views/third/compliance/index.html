@@ -17,7 +17,7 @@
                             <p>+</p>
                             <span>点击上传</span>
                         </div>
-                        <CreateChooseImg @getCameraImg="getCameraImg" :getImgSub="index"></CreateChooseImg>
+                        <CreateChooseImg @getCameraImg="getCameraImg" :getImgSub="index" v-if="!item"></CreateChooseImg>
                     </div>
                     <div class="license_img_add" v-if="complianceInfo.businessLicensePhoto.length<3" @click="addPhoto">
                         <div class="license_img_box">
@@ -52,7 +52,7 @@
                                 <span>执照上，没有经营期限的为长期有效</span>
                             </div>
                             <div class="item_right">
-                                <van-radio name="1" checked-color="#07c160" icon-size="20px"></van-radio>
+                                <van-radio name="1" checked-color="#07c160" icon-size="40px"></van-radio>
                             </div>
                         </div>
                         <div class="validity_item">
@@ -61,7 +61,7 @@
                                 <span>请选择营业执照上显示的准确有效期</span>
                             </div>
                             <div class="item_right">
-                                <van-radio name="2" checked-color="#07c160" icon-size="20px"></van-radio>
+                                <van-radio name="2" checked-color="#07c160" icon-size="40px"></van-radio>
                             </div>
                         </div>
                         <div class="calendar_wrapper" v-if="radio === '2'">
@@ -78,7 +78,7 @@
             </li>
             <li class="range_wrapper">
                 <label>经营范围</label>
-                <textarea type="text" placeholder="请输入营业范围" v-model="complianceInfo.businessScope" maxlength="100"></textarea>
+                <textarea type="text" placeholder="请输入营业范围" v-model="complianceInfo.businessScope"></textarea>
             </li>
         </ul>
     </div>

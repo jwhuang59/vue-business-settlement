@@ -70,7 +70,7 @@ export default {
         },
         getBasicInfo() {
             this.$request('getBasicInfo').then(res => {
-                if(!res.data.afterIDCard) return false
+                if(!res.data.storePhone) return false
                 this.basicInfo.storeName = res.data.storeName;
                 this.basicInfo.storePhone = res.data.storePhone;
                 this.basicInfo.province = res.data.province;
@@ -174,12 +174,8 @@ export default {
             ) {
                 Dialog.alert({ message: '请输入门店详细地址' });
                 return false;
-            } else if (
-                this.basicInfo.idCardNumber === '' ||
-                this.basicInfo.idCardNumber === undefined ||
-                this.basicInfo.idCardNumber === null
-            ) {
-                Dialog.alert({ message: '请输入身份证号' });
+            } else if (!validateIdCard(this.basicInfo.idCardNumber)) {
+                Dialog.alert({ message: '请输入正确的身份证号' });
                 return false;
             } else if (
                 this.basicInfo.frontIDCard === '' ||

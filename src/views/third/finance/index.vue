@@ -90,50 +90,51 @@ export default {
             ) {
                 Dialog.alert({ message: '请输入微信商户号' });
                 return false;
-            } else if (
-                this.financeInfo.paymentList[0].bankCardName === '' ||
-                this.financeInfo.paymentList[0].bankCardName === undefined ||
-                this.financeInfo.paymentList[0].bankCardName === null
-            ) {
-                Dialog.alert({ message: '请输入银行卡户名' });
-                return false;
-            } else if (
-                this.financeInfo.paymentList[0].bankCardNumber === '' ||
-                this.financeInfo.paymentList[0].bankCardNumber === undefined ||
-                this.financeInfo.paymentList[0].bankCardNumber === null
-            ) {
-                Dialog.alert({ message: '请输入银行卡号' });
-                return false;
-            } else if (
-                this.financeInfo.paymentList[0].bankCardDeposit === '' ||
-                this.financeInfo.paymentList[0].bankCardDeposit === undefined ||
-                this.financeInfo.paymentList[0].bankCardDeposit === null
-            ) {
-                Dialog.alert({ message: '请输入开户行' });
-                return false;
-            } else if (!regPhone.test(this.financeInfo.paymentList[0].bankCardPhone)) {
-                Dialog.alert({ message: '请输入正确的银行卡绑定手机号' });
-                return false;
             } else {
-                this.financeInfo.cashierSystemList = [
-                    {
-                        erpPost: this.financeInfo.cashierSystem,
-                        erpPosNo: ''
-                    },
-                    {
-                        erpPost: 7,
-                        erpPosNo: this.financeInfo.alipayAccount
-                    },
-                    {
-                        erpPost: 6,
-                        erpPosNo: this.financeInfo.wechatMerchant
-                    }
-                ];
-                Dialog.confirm({
-                    title: '提示',
-                    message: '是否保存下一步'
-                })
-                    .then(() => {
+                for (const i in this.financeInfo.paymentList) {
+                    if(this.financeInfo.paymentList[i].bankCardName === '' ||
+                        this.financeInfo.paymentList[i].bankCardName === undefined ||
+                        this.financeInfo.paymentList[i].bankCardName === null
+                    ) {
+                        Dialog.alert({ message: '请输入银行卡户名' });
+                        return false;
+                    } else if (
+                        this.financeInfo.paymentList[i].bankCardNumber === '' ||
+                        this.financeInfo.paymentList[i].bankCardNumber === undefined ||
+                        this.financeInfo.paymentList[i].bankCardNumber === null
+                    ) {
+                        Dialog.alert({ message: '请输入银行卡号' });
+                        return false;
+                    } else if (
+                        this.financeInfo.paymentList[i].bankCardDeposit === '' ||
+                        this.financeInfo.paymentList[i].bankCardDeposit === undefined ||
+                        this.financeInfo.paymentList[i].bankCardDeposit === null
+                    ) {
+                        Dialog.alert({ message: '请输入开户行' });
+                        return false;
+                    } else if (!regPhone.test(this.financeInfo.paymentList[i].bankCardPhone)) {
+                        Dialog.alert({ message: '请输入正确的银行卡绑定手机号' });
+                        return false;
+                    } else {
+                        
+                    this.financeInfo.cashierSystemList = [
+                        {
+                            erpPost: this.financeInfo.cashierSystem,
+                            erpPosNo: ''
+                        },
+                        {
+                            erpPost: 7,
+                            erpPosNo: this.financeInfo.alipayAccount
+                        },
+                        {
+                            erpPost: 6,
+                            erpPosNo: this.financeInfo.wechatMerchant
+                        }
+                    ];
+                    Dialog.confirm({
+                        title: '提示',
+                        message: '是否保存下一步'
+                    }).then(() => {
                         this.$request('updateFinancialInfo', this.financeInfo)
                             .then(res => {
                                 if (res.data) {
@@ -156,6 +157,9 @@ export default {
                             });
                     })
                     .catch(() => {});
+                    }
+                }
+              
             }
         }
     }

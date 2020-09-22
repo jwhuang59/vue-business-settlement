@@ -17,7 +17,7 @@ export default {
         return {
             complianceInfo: {
                 businessLicensePhoto: [''],
-                businessTermValidity: '1',
+                businessTermValidity: '',
                 businessTermValidityText: '请选择营业执照有效期',
                 businessApprovalTime: '请选择营业执照核准日期'
             },
@@ -78,7 +78,12 @@ export default {
             this.uploadFileImg.splice(i, 1);
         },
         changeRadio(e) {
-            this.complianceInfo.businessTermValidity = e;
+            if(e === "2"){
+                this.complianceInfo.businessTermValidity = this.complianceInfo.businessTermValidity !== '1' ? this.complianceInfo.businessTermValidity : '2'
+            }else{
+                this.complianceInfo.businessTermValidity = e;
+            }
+            
         },
         getValidity(e) {
             const getDate = this.dayjs(e).format('YYYY-MM-DD');
