@@ -65,7 +65,9 @@
                             </div>
                         </div>
                         <div class="calendar_wrapper" v-if="radio === '2'">
-                            <input type="button" :value="complianceInfo.businessTermValidityText" class="calendar_btn" @click="changeCalendar(1)" />
+                            <input type="button" :value="complianceInfo.startBusinessTermValidityText" class="calendar_btn" @click="changeCalendar(3)" />
+                            <van-icon name="arrow" class="icon_arrow" />
+                            <input type="button" :value="complianceInfo.businessTermValidityText" class="calendar_btn input_date" @click="changeCalendar(1)" />
                             <van-icon name="arrow" class="icon_arrow" />
                         </div>
                     </van-radio-group>

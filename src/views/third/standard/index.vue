@@ -18,7 +18,6 @@ export default {
             licenseArr: [{}],
             showPicker: false,
             showCalendar: false,
-            rangeColumns: ['123', '456'],
         };
     },
     mounted() {
@@ -33,11 +32,14 @@ export default {
                 this.standardInfo.legalRepresentativeName = res.data.legalRepresentativeName;
                 this.standardInfo.businessRegisteredAddress = res.data.businessRegisteredAddress;
                 this.standardInfo.unifiedCreditCode = res.data.unifiedCreditCode;
+                const getDate = this.dayjs(new Date()).format('YYYY-MM-DD');
+                this.standardInfo.startBusinessTermValidity = res.data.businessTermValidity === '1' ? getDate : res.data.startBusinessTermValidity
                 this.$set(
                     this.standardInfo,
                     'businessTermValidity',
                     res.data.businessTermValidity === '1' ? '永久有效' : res.data.businessTermValidity
                 );
+                
                 this.standardInfo.businessApprovalTime = res.data.businessApprovalTime;
                 this.standardInfo.businessScope = res.data.businessScope;
                 this.standardInfo.businessLicensePhoto = res.data.businessLicensePhoto;

@@ -17,8 +17,8 @@ export default {
         return {
             complianceInfo: {
                 businessLicensePhoto: [''],
-                businessTermValidity: '',
-                businessTermValidityText: '请选择营业执照有效期',
+                startBusinessTermValidityText: '开始日期',
+                businessTermValidityText: '结束日期',
                 businessApprovalTime: '请选择营业执照核准日期'
             },
             uploadFileImg:[''],
@@ -52,11 +52,15 @@ export default {
                         this.radio = '2';
                         this.complianceInfo.businessTermValidity = res.data.businessTermValidity;
                         this.complianceInfo.businessTermValidityText = res.data.businessTermValidity;
+                        this.complianceInfo.startBusinessTermValidity = res.data.startBusinessTermValidity;
+                        this.complianceInfo.startBusinessTermValidityText = res.data.startBusinessTermValidity;
                         
                     } else {
                         this.radio = '1';
                         this.complianceInfo.businessTermValidity = '1';
-                        this.complianceInfo.businessTermValidityText = '请选择营业执照有效期';
+                        this.complianceInfo.businessTermValidityText = '结束日期';
+                        this.complianceInfo.startBusinessTermValidity = '1';
+                        this.complianceInfo.startBusinessTermValidityText = '开始日期';
                     }
                     this.complianceInfo.businessApprovalTime = res.data.businessApprovalTime;
                     this.complianceInfo.businessScope = res.data.businessScope;
@@ -80,6 +84,7 @@ export default {
         changeRadio(e) {
             if(e === "2"){
                 this.complianceInfo.businessTermValidity = this.complianceInfo.businessTermValidity !== '1' ? this.complianceInfo.businessTermValidity : '2'
+                this.complianceInfo.startBusinessTermValidity = this.complianceInfo.startBusinessTermValidity !== '1' ? this.complianceInfo.startBusinessTermValidity : '2'
             }else{
                 this.complianceInfo.businessTermValidity = e;
             }
@@ -94,6 +99,10 @@ export default {
                     break;
                 case 2:
                     this.complianceInfo.businessApprovalTime = getDate;
+                    break;
+                case 3:
+                    this.complianceInfo.startBusinessTermValidityText = getDate;
+                    this.complianceInfo.startBusinessTermValidity = getDate;
                     break;
             }
             this.showCalendar = false;
@@ -112,6 +121,7 @@ export default {
             return newNameByUrl
         },
         nextStep() {
+            console.log(this.complianceInfo)
             if (this.complianceInfo.businessLicensePhoto.length < 0) {
                 Dialog.alert({ message: '请上传营业执照照片' });
                 return false;
@@ -144,12 +154,20 @@ export default {
                 Dialog.alert({ message: '请输入营业执照注册地址' });
                 return false;
             } else if (
+                this.complianceInfo.startBusinessTermValidity === '' ||
+                this.complianceInfo.startBusinessTermValidity === undefined ||
+                this.complianceInfo.startBusinessTermValidity === null ||
+                this.complianceInfo.startBusinessTermValidity === '2'
+            ) {
+                Dialog.alert({ message: '请输入营业执照开始日期' });
+                return false;
+            } else if (
                 this.complianceInfo.businessTermValidity === '' ||
                 this.complianceInfo.businessTermValidity === undefined ||
                 this.complianceInfo.businessTermValidity === null ||
                 this.complianceInfo.businessTermValidity === '2'
             ) {
-                Dialog.alert({ message: '请输入营业执照有效期' });
+                Dialog.alert({ message: '请输入营业执照结束日期' });
                 return false;
             } else if (
                 this.complianceInfo.businessApprovalTime === '' ||

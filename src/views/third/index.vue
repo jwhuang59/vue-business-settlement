@@ -1,14 +1,13 @@
 <template>
     <div class="template">
         <div class="header" v-show="$route.meta.isCommon">
-            <van-steps :active="$route.meta.indexStep" class="step_wrapper">
+            <van-steps :active="$route.meta.indexStep" class="step_wrapper" active-icon="checked">
                 <template v-for="item in $router.options.routes">
                     <van-step
                         v-for="(child, index) in item.children"
                         :key="index"
-                        v-if="child.meta.process === $route.meta.process"
-                        >{{ child.meta.title }}</van-step
-                    >
+                        v-if="child.meta.process === $route.meta.process" class="step_item"
+                        >{{ child.meta.title }}</van-step>
                 </template>
             </van-steps>
         </div>
@@ -22,6 +21,17 @@
 <style scoped>
 .template {
     padding-bottom: 20px;
+}
+.step_wrapper{
+    width:1000px
+}
+.step_item{
+    font-size:50px !important;
+    padding-left:-50px;
+}
+.van-step__icon{
+     font-size:50px !important;
+    height:100px !important;
 }
 .header {
     width: 90%;
