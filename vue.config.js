@@ -3,7 +3,7 @@ module.exports = {
     devServer: {
         proxy: {
             '/ssoapi': {
-                target: 'http://172.17.8.56:2010',
+                target: 'http://10.20.30.16:2010',
                 changeOrigin: true,
                 pathRewrite: { '^/ssoapi': '/' }
             }
