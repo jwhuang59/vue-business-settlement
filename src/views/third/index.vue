@@ -9,6 +9,7 @@
                         </div>
                         <van-icon name="checked" class="icon_checked" size="55" v-else-if="$route.meta.indexStep>index" />
                         <div class="dot" v-else></div>
+                        <div class="line"></div>
                         <p>{{ child.meta.title }}</p>
                     </div>
                 </template>
@@ -40,10 +41,14 @@
             align-items: center;
         }
         .step_item{
+            width:25%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            // overflow: hidden;
+            position: relative;
+            z-index:2;
             .icon_checked{
                 color:#999
             }
@@ -70,6 +75,18 @@
                     background:#31CF6E
                 }
             }
+            .line{
+                width:40%;
+                flex:1;
+                height:1px;
+                position:absolute;
+                background: #868686;
+                right:-20%;
+                top:8px;
+            }
+        }
+        .step_item:last-child .line{
+            display: none;
         }
     }
     button {
