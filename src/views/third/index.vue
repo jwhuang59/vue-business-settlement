@@ -3,11 +3,12 @@
         <div class="header" v-show="$route.meta.isCommon">
             <div class="step_wrapper">
                 <template v-for="item in $router.options.routes">
+                    <!-- class="[item.children.length > 2 ? 'step_item_other' : '' ,'step_item']" -->
                     <div class="step_item" v-for="(child, index) in item.children" :key="index" v-if="child.meta.process === $route.meta.process">
                         <div class="active dot" v-if="$route.meta.indexStep === index">
                             <span></span>
                         </div>
-                        <van-icon name="checked" class="icon_checked" size="55" v-else-if="$route.meta.indexStep>index" />
+                        <van-icon name="checked" class="icon_checked" size="0.5rem" v-else-if="$route.meta.indexStep>index" />
                         <div class="dot" v-else></div>
                         <div class="line"></div>
                         <p>{{ child.meta.title }}</p>

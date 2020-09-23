@@ -17,6 +17,7 @@ export default {
         return {
             complianceInfo: {
                 businessLicensePhoto: [''],
+                businessTermValidity:'1',
                 startBusinessTermValidityText: '开始日期',
                 businessTermValidityText: '结束日期',
                 businessApprovalTime: '请选择营业执照核准日期'

@@ -2,7 +2,7 @@
     <div class="content">
         <div ref="camera_input"></div>
         <van-overlay :show="showLoading">
-            <van-loading type="spinner" color="#fff" class="loading" size="50" />
+            <van-loading type="spinner" color="#fff" class="loading" size="0.5rem" />
         </van-overlay>
     </div>
 </template>
