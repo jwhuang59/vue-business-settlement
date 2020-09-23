@@ -17,21 +17,21 @@ export default {
                     photoNum: 1,
                     uploadPhotoNum: 0,
                     uploadPhotoMenu: [''],
-                    uploadFileImg: [''],
+                    uploadFileImg: ['']
                 },
                 {
                     title: '门头照片*',
                     photoNum: 6,
                     uploadPhotoNum: 0,
                     uploadPhotoMenu: [''],
-                    uploadFileImg: [''],
+                    uploadFileImg: ['']
                 },
                 {
                     title: '店内照片*',
                     photoNum: 6,
                     uploadPhotoNum: 0,
                     uploadPhotoMenu: [''],
-                    uploadFileImg: [''],
+                    uploadFileImg: ['']
                 }
             ]
         };
@@ -42,7 +42,7 @@ export default {
     methods: {
         getPerfectInfo() {
             this.$request('getPerfectInfo').then(res => {
-                if(res.data.healthPhoto[0] === '') return false;
+                if (res.data.healthPhoto[0] === '') return false;
                 this.perfectMenu[0].uploadPhotoNum = res.data.healthPhoto.length;
                 this.perfectMenu[0].uploadPhotoMenu = this.getNameByUrl(res.data.healthPhoto);
                 this.perfectMenu[0].uploadFileImg = res.data.healthPhoto;
@@ -69,11 +69,11 @@ export default {
         },
         getNameByUrl(urlArr) {
             const newNameByUrl = [];
-            urlArr.map((item,index) => {
+            urlArr.map((item, index) => {
                 const formatUrl = item.split('?')[0].split('/');
                 newNameByUrl[index] = formatUrl[3] + '/' + formatUrl[4];
-            })
-            return newNameByUrl
+            });
+            return newNameByUrl;
         },
         nextStep() {
             if (

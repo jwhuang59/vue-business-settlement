@@ -22,7 +22,7 @@ export default {
                 businessTermValidityText: '结束日期',
                 businessApprovalTime: '请选择营业执照核准日期'
             },
-            uploadFileImg:[''],
+            uploadFileImg: [''],
             uploadPhotoNum: 0,
             calendarSub: '',
             showCalendar: false,
@@ -42,8 +42,8 @@ export default {
         getComplianceInfo() {
             this.$request('getComplianceInfo').then(res => {
                 if (res.data.businessLicensePhoto) {
-                    this.uploadFileImg = res.data.businessLicensePhoto
-                    this.complianceInfo.businessLicensePhoto = this.getNameByUrl(res.data.businessLicensePhoto)
+                    this.uploadFileImg = res.data.businessLicensePhoto;
+                    this.complianceInfo.businessLicensePhoto = this.getNameByUrl(res.data.businessLicensePhoto);
                     this.complianceInfo.businessLicenseName = res.data.businessLicenseName;
                     this.complianceInfo.legalRepresentativeName = res.data.legalRepresentativeName;
                     this.complianceInfo.unifiedCreditCode = res.data.unifiedCreditCode;
@@ -55,7 +55,6 @@ export default {
                         this.complianceInfo.businessTermValidityText = res.data.businessTermValidity;
                         this.complianceInfo.startBusinessTermValidity = res.data.startBusinessTermValidity;
                         this.complianceInfo.startBusinessTermValidityText = res.data.startBusinessTermValidity;
-                        
                     } else {
                         this.radio = '1';
                         this.complianceInfo.businessTermValidity = '1';
@@ -83,13 +82,16 @@ export default {
             this.uploadFileImg.splice(i, 1);
         },
         changeRadio(e) {
-            if(e === "2"){
-                this.complianceInfo.businessTermValidity = this.complianceInfo.businessTermValidity !== '1' ? this.complianceInfo.businessTermValidity : '2'
-                this.complianceInfo.startBusinessTermValidity = this.complianceInfo.startBusinessTermValidity !== '1' ? this.complianceInfo.startBusinessTermValidity : '2'
-            }else{
+            if (e === '2') {
+                this.complianceInfo.businessTermValidity =
+                    this.complianceInfo.businessTermValidity !== '1' ? this.complianceInfo.businessTermValidity : '2';
+                this.complianceInfo.startBusinessTermValidity =
+                    this.complianceInfo.startBusinessTermValidity !== '1'
+                        ? this.complianceInfo.startBusinessTermValidity
+                        : '2';
+            } else {
                 this.complianceInfo.businessTermValidity = e;
             }
-            
         },
         getValidity(e) {
             const getDate = this.dayjs(e).format('YYYY-MM-DD');
@@ -115,14 +117,14 @@ export default {
         },
         getNameByUrl(urlArr) {
             const newNameByUrl = [];
-            urlArr.map((item,index) => {
+            urlArr.map((item, index) => {
                 const formatUrl = item.split('?')[0].split('/');
                 newNameByUrl[index] = formatUrl[3] + '/' + formatUrl[4];
-            })
-            return newNameByUrl
+            });
+            return newNameByUrl;
         },
         nextStep() {
-            console.log(this.complianceInfo)
+            console.log(this.complianceInfo);
             if (this.complianceInfo.businessLicensePhoto.length < 0) {
                 Dialog.alert({ message: '请上传营业执照照片' });
                 return false;

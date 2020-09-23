@@ -70,7 +70,7 @@ export default {
         },
         getBasicInfo() {
             this.$request('getBasicInfo').then(res => {
-                if(!res.data.storePhone) return false
+                if (!res.data.storePhone) return false;
                 this.basicInfo.storeName = res.data.storeName;
                 this.basicInfo.storePhone = res.data.storePhone;
                 this.basicInfo.province = res.data.province;
@@ -150,7 +150,7 @@ export default {
             return formatUrl[3] + '/' + formatUrl[4];
         },
         nextStep() {
-            console.log(this.basicInfo)
+            console.log(this.basicInfo);
             if (
                 this.basicInfo.storeName === '' ||
                 this.basicInfo.storeName === undefined ||
@@ -205,7 +205,6 @@ export default {
                     message: '是否保存下一步'
                 })
                     .then(() => {
-                        
                         this.$request('updateBasicInfo', this.basicInfo)
                             .then(res => {
                                 if (res.data) {

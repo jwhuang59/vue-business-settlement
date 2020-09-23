@@ -33,7 +33,7 @@ export default {
     methods: {
         getFinanceInfo() {
             this.$request('getFinancialInfo').then(res => {
-                if(res.data.paymentList.length === 0 ) return false
+                if (res.data.paymentList.length === 0) return false;
                 this.financeInfo.cashierSystem = res.data.cashierSystem;
                 switch (res.data.cashierSystem) {
                     case 1:
@@ -92,7 +92,8 @@ export default {
                 return false;
             } else {
                 for (const i in this.financeInfo.paymentList) {
-                    if(this.financeInfo.paymentList[i].bankCardName === '' ||
+                    if (
+                        this.financeInfo.paymentList[i].bankCardName === '' ||
                         this.financeInfo.paymentList[i].bankCardName === undefined ||
                         this.financeInfo.paymentList[i].bankCardName === null
                     ) {
@@ -116,50 +117,49 @@ export default {
                         Dialog.alert({ message: '请输入正确的银行卡绑定手机号' });
                         return false;
                     } else {
-                        
-                    this.financeInfo.cashierSystemList = [
-                        {
-                            erpPost: this.financeInfo.cashierSystem,
-                            erpPosNo: ''
-                        },
-                        {
-                            erpPost: 7,
-                            erpPosNo: this.financeInfo.alipayAccount
-                        },
-                        {
-                            erpPost: 6,
-                            erpPosNo: this.financeInfo.wechatMerchant
-                        }
-                    ];
-                    Dialog.confirm({
-                        title: '提示',
-                        message: '是否保存下一步'
-                    }).then(() => {
-                        this.$request('updateFinancialInfo', this.financeInfo)
-                            .then(res => {
-                                if (res.data) {
-                                    Toast.success({
-                                        message: '保存成功',
-                                        duration: 3000,
-                                        forbidClick: true
+                        this.financeInfo.cashierSystemList = [
+                            {
+                                erpPost: this.financeInfo.cashierSystem,
+                                erpPosNo: ''
+                            },
+                            {
+                                erpPost: 7,
+                                erpPosNo: this.financeInfo.alipayAccount
+                            },
+                            {
+                                erpPost: 6,
+                                erpPosNo: this.financeInfo.wechatMerchant
+                            }
+                        ];
+                        Dialog.confirm({
+                            title: '提示',
+                            message: '是否保存下一步'
+                        })
+                            .then(() => {
+                                this.$request('updateFinancialInfo', this.financeInfo)
+                                    .then(res => {
+                                        if (res.data) {
+                                            Toast.success({
+                                                message: '保存成功',
+                                                duration: 3000,
+                                                forbidClick: true
+                                            });
+                                            setTimeout(() => {
+                                                this.jump('compliance');
+                                            }, 3000);
+                                        }
+                                    })
+                                    .catch(() => {
+                                        Toast.fail({
+                                            message: '保存失败',
+                                            duration: 3000,
+                                            forbidClick: true
+                                        });
                                     });
-                                    setTimeout(() => {
-                                        this.jump('compliance');
-                                    }, 3000);
-                                }
                             })
-                            .catch(() => {
-                                Toast.fail({
-                                    message: '保存失败',
-                                    duration: 3000,
-                                    forbidClick: true
-                                });
-                            });
-                    })
-                    .catch(() => {});
+                            .catch(() => {});
                     }
                 }
-              
             }
         }
     }
