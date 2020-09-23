@@ -3,18 +3,27 @@
         <div class="header" v-show="$route.meta.isCommon">
             <div class="step_wrapper">
                 <template v-for="item in $router.options.routes">
-                    <div class="step_item" v-for="(child, index) in item.children" :key="index" v-if="child.meta.process === $route.meta.process">
+                    <div
+                        class="step_item"
+                        v-for="(child, index) in item.children"
+                        :key="index"
+                        v-if="child.meta.process === $route.meta.process"
+                    >
                         <div class="active dot" v-if="$route.meta.indexStep === index">
                             <span></span>
                         </div>
-                        <van-icon name="checked" class="icon_checked" size="55" v-else-if="$route.meta.indexStep>index" />
+                        <van-icon
+                            name="checked"
+                            class="icon_checked"
+                            size="55"
+                            v-else-if="$route.meta.indexStep > index"
+                        />
                         <div class="dot" v-else></div>
                         <div class="line"></div>
                         <p>{{ child.meta.title }}</p>
                     </div>
                 </template>
             </div>
-
         </div>
         <router-view></router-view>
         <!-- <keep-alive>
@@ -32,7 +41,7 @@
         margin: 20px auto;
         .step_wrapper {
             width: 90%;
-            padding:15px 20px;
+            padding: 15px 20px;
             margin: 0 auto;
             background: #f8f8f8;
             display: flex;
@@ -40,51 +49,53 @@
             justify-content: space-between;
             align-items: center;
         }
-        .step_item{
-            width:25%;
+        .step_item {
+            width: 25%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             position: relative;
-            z-index:2;
-            .icon_checked{
-                color:#999
+            z-index: 2;
+            .icon_checked {
+                color: #999;
             }
-            p{
-                font-size:13px;
-                margin-top:5px;
-                color:#333300
+            p {
+                font-size: 13px;
+                margin-top: 5px;
+                color: #333300;
             }
-            .dot{
-                width:15px;
-                height:15px;
+            .dot {
+                width: 15px;
+                height: 15px;
                 border-radius: 50%;
-                border:1px solid #999;
+                border: 1px solid #999;
                 position: relative;
             }
-            .active{
-                border:1px solid #31CF6E;
-                span{
-                    width:10px;height:10px;
-                    position:absolute;
-                    left:50%;top:50%;
+            .active {
+                border: 1px solid #31cf6e;
+                span {
+                    width: 10px;
+                    height: 10px;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
                     border-radius: 50%;
-                    transform: translate(-50%,-50%);
-                    background:#31CF6E
+                    transform: translate(-50%, -50%);
+                    background: #31cf6e;
                 }
             }
-            .line{
-                width:40%;
-                flex:1;
-                height:1px;
-                position:absolute;
+            .line {
+                width: 40%;
+                flex: 1;
+                height: 1px;
+                position: absolute;
                 background: #868686;
-                right:-20%;
-                top:8px;
+                right: -20%;
+                top: 8px;
             }
         }
-        .step_item:last-child .line{
+        .step_item:last-child .line {
             display: none;
         }
     }
@@ -99,7 +110,6 @@
         font-size: 15px;
     }
 }
-
 </style>
 <script>
 import { Step, Steps, button } from 'vant';

@@ -10,7 +10,7 @@ module.exports = {
         getApp: true
     },
     rules: {
-        'prettier/prettier': 'off',
+        'prettier/prettier': 'error',
         'no-unused-vars': 'off',
         'no-extend-native': 'off',
         'no-debugger': 'off',
