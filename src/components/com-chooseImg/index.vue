@@ -54,26 +54,28 @@ export default {
             input.onchange = e => {
                 this.showLoading = true;
                 if (e.target.files.length === 0) return false;
-                const formData = new FormData();
-                formData.append('image', e.target.files[0]);
-                this.$request('uploadImage', formData)
-                    .then(res => {
-                        this.$emit('getCameraImg', {
-                            img: res.data.url,
-                            name: res.data.objectName,
-                            sub: this.getImgSub,
-                            type: this.getImgType
+                setTimeout(() => {
+                    const formData = new FormData();
+                    formData.append('image', e.target.files[0]);
+                    this.$request('uploadImage', formData)
+                        .then(res => {
+                            this.$emit('getCameraImg', {
+                                img: res.data.url,
+                                name: res.data.objectName,
+                                sub: this.getImgSub,
+                                type: this.getImgType
+                            });
+                            this.showLoading = false;
+                        })
+                        .catch(() => {
+                            Toast.fail({
+                                message: '上传失败，请重新上传',
+                                duration: 3000,
+                                forbidClick: true
+                            });
+                            this.showLoading = false;
                         });
-                        this.showLoading = false;
-                    })
-                    .catch(() => {
-                        Toast.fail({
-                            message: '上传失败，请重新上传',
-                            duration: 3000,
-                            forbidClick: true
-                        });
-                        this.showLoading = false;
-                    });
+                },100)
             };
         }
     },
