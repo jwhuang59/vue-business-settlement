@@ -7,11 +7,12 @@
     </div>
 </template>
 <script>
-import { Loading, Overlay } from 'vant';
+import { Loading, Overlay, Toast } from 'vant';
 export default {
     components: {
         [Loading.name]: Loading,
-        [Overlay.name]: Overlay
+        [Overlay.name]: Overlay,
+        [Toast.name]: Toast
     },
     name: 'CreateChooseImg',
     props: {
@@ -65,7 +66,14 @@ export default {
                         });
                         this.showLoading = false;
                     })
-                    .catch(() => {});
+                    .catch(() => {
+                        Toast.fail({
+                            message: '上传失败，请重新上传',
+                            duration: 3000,
+                            forbidClick: true
+                        });
+                        this.showLoading = false;
+                    });
             };
         }
     },

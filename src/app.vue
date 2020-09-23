@@ -1,9 +1,9 @@
 <template>
     <div id="app">
-        <div :class="[$route.meta.style, 'header']" v-if="$route.meta.isThird">
+        <!-- <div :class="[$route.meta.style, 'header']" v-if="$route.meta.isThird">
             <van-icon name="arrow-left" class="icon_left" @click="back(-1)" v-show="!$route.meta.isBack" />
             <p>{{ $route.meta.title }}</p>
-        </div>
+        </div> -->
         <router-view />
     </div>
 </template>

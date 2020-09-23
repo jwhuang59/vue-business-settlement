@@ -1,0 +1,13 @@
+<div class="tabbar_menu">
+    <div class="tabbar_item" v-for="(item, index) in tabList" :key="index" @tap="switchTab(index,item.tabName)">
+        <div :class="currentTabIndex == index ? 'on' : ''">
+            <div class="icon">
+                <image class="tabIcon" :src="[ currentTabIndex == index ? item.selectSrc :  item.src ]">
+                </image>
+            </div>
+            <div class="text" :style="[currentTabIndex == index ? { color: selectColor } : { color: color }]">
+                {{ item.text }}</div>
+        </div>
+
+    </div>
+</div>

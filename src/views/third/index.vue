@@ -1,15 +1,19 @@
 <template>
     <div class="template">
         <div class="header" v-show="$route.meta.isCommon">
-            <van-steps :active="$route.meta.indexStep" class="step_wrapper" active-icon="checked">
+            <div class="step_wrapper">
                 <template v-for="item in $router.options.routes">
-                    <van-step
-                        v-for="(child, index) in item.children"
-                        :key="index"
-                        v-if="child.meta.process === $route.meta.process" class="step_item"
-                        >{{ child.meta.title }}</van-step>
+                    <div class="step_item" v-for="(child, index) in item.children" :key="index" v-if="child.meta.process === $route.meta.process">
+                        <div class="active dot" v-if="$route.meta.indexStep === index">
+                            <span></span>
+                        </div>
+                        <van-icon name="checked" class="icon_checked" size="55" v-else-if="$route.meta.indexStep>index" />
+                        <div class="dot" v-else></div>
+                        <p>{{ child.meta.title }}</p>
+                    </div>
                 </template>
-            </van-steps>
+            </div>
+
         </div>
         <router-view></router-view>
         <!-- <keep-alive>
@@ -18,31 +22,68 @@
         <van-button type="default" @click="getProblem" v-show="$route.meta.isCommon">遇到问题 · 我要反馈</van-button>
     </div>
 </template>
-<style scoped>
+<style lang="scss" scoped>
 .template {
     padding-bottom: 20px;
+    .header {
+        width: 90%;
+        background: #f8f8f8;
+        margin: 20px auto;
+        .step_wrapper {
+            width: 90%;
+            padding:15px 20px;
+            margin: 0 auto;
+            background: #f8f8f8;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .step_item{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .icon_checked{
+                color:#999
+            }
+            p{
+                font-size:13px;
+                margin-top:5px;
+                color:#333300
+            }
+            .dot{
+                width:15px;
+                height:15px;
+                border-radius: 50%;
+                border:1px solid #999;
+                position: relative;
+            }
+            .active{
+                border:1px solid #31CF6E;
+                span{
+                    width:10px;height:10px;
+                    position:absolute;
+                    left:50%;top:50%;
+                    border-radius: 50%;
+                    transform: translate(-50%,-50%);
+                    background:#31CF6E
+                }
+            }
+        }
+    }
+    button {
+        width: 90%;
+        display: block;
+        margin: 0 auto;
+        height: 45px;
+        color: #31cf6e;
+        border: 1px solid #31cf6e;
+        border-radius: 20px;
+        font-size: 15px;
+    }
 }
-.header {
-    width: 90%;
-    background: #f8f8f8;
-    padding: 10px 0;
-    margin: 20px auto;
-}
-.step_wrapper {
-    width: 70%;
-    margin: 0 auto;
-    background: #f8f8f8;
-}
-button {
-    width: 90%;
-    display: block;
-    margin: 0 auto;
-    height: 45px;
-    color: #31cf6e;
-    border: 1px solid #31cf6e;
-    border-radius: 20px;
-    font-size: 15px;
-}
+
 </style>
 <script>
 import { Step, Steps, button } from 'vant';

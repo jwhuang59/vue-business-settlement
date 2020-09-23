@@ -1,0 +1,33 @@
+.tabbar_menu {
+    width: 100%;
+    height: 100rpx;
+    display: flex;
+    background: white;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1rpx solid #ccc;
+    padding: 10rpx 0 50rpx;
+    box-sizing: content-box;
+    .tabbar_item {
+        padding: 10rpx;
+        .text {
+            font-size: 24rpx;
+            font-weight: 600;
+            margin-top: 10rpx;
+        }
+    }
+    .tabIcon {
+        width: 50rpx;
+        height: 50rpx;
+        display: block;
+        margin: 0 auto;
+        font-size: 24rpx;
+    }
+}

@@ -44,7 +44,7 @@ export default [
                 meta: {
                     title: '阅读协议',
                     isCommon: true,
-                    indexStep: 0,
+                    indexStep: 3,
                     process: 1
                 }
             },
@@ -55,7 +55,7 @@ export default [
                 meta: {
                     title: '信息标准',
                     isCommon: true,
-                    indexStep: 1,
+                    indexStep: 4,
                     process: 1
                 }
             },
@@ -66,7 +66,7 @@ export default [
                 meta: {
                     title: '许可证',
                     isCommon: true,
-                    indexStep: 2,
+                    indexStep: 5,
                     process: 1
                 }
             },
@@ -77,7 +77,7 @@ export default [
                 meta: {
                     title: '完善信息',
                     isCommon: true,
-                    indexStep: 3,
+                    indexStep: 6,
                     process: 1
                 }
             }

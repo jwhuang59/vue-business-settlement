@@ -2,7 +2,7 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 60px;
+    top: 0;
     bottom: 0;
     background: #F3F5F7;
     .status_wrapper {
@@ -10,7 +10,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 15px 0;
+        padding: 40px 0;
         background: #fff;
         .icon_clock {
             font-size: 60px;
