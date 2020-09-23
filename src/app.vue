@@ -9,7 +9,7 @@
 </template>
 <style lang="scss" src="./assets/scss/app.scss"></style>
 <style scoped>
-.header {
+/* .header {
     width: 100%;
     height: 60px;
     background: #f8f8f8;
@@ -36,7 +36,7 @@
 }
 .header p {
     font-size: 16px;
-}
+} */
 </style>
 <script>
 /** 动态引入icon-css样式文件 */
