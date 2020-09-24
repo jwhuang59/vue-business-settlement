@@ -16,11 +16,22 @@
             margin: 10px 0
         }
         .scroll_box {
+            height: 300px;
             font-size: 12px;
-            color: #999;
+            color: #666;
             overflow-y: scroll;
             text-indent: 28px;
             letter-spacing: 1px;
+            .left {
+                text-indent: 0
+            }
+            .center {
+                text-align: center;
+                font-size: 14px;
+            }
+            .right {
+                text-align: right;
+            }
         }
         .checked {
             display: flex;
