@@ -78,7 +78,7 @@
             .line {
                 width: 40%;
                 flex: 1;
-                height: 1px;
+                height: 0.5px;
                 position: absolute;
                 background: #868686;
                 right: -20%;

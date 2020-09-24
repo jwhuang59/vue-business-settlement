@@ -53,7 +53,7 @@ export default [
                 path: '/standard',
                 component: () => import('@/views/third/standard'),
                 meta: {
-                    title: '信息标准',
+                    title: '信息核准',
                     isCommon: true,
                     indexStep: 4,
                     process: 1

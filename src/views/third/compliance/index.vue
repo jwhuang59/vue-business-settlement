@@ -18,10 +18,12 @@ export default {
             complianceInfo: {
                 businessLicensePhoto: [''],
                 businessTermValidity:'1',
+                startBusinessTermValidity: '1',
                 startBusinessTermValidityText: '开始日期',
                 businessTermValidityText: '结束日期',
                 businessApprovalTime: '请选择营业执照核准日期'
             },
+            setBusinessTermValidity:'',
             uploadFileImg: [''],
             uploadPhotoNum: 0,
             calendarSub: '',
@@ -66,7 +68,9 @@ export default {
                     this.complianceInfo.businessScope = res.data.businessScope;
                     this.uploadPhotoNum = res.data.businessLicensePhoto.length;
                 }
+                console.log(this.complianceInfo)
             });
+            
         },
         changeCalendar(i) {
             this.calendarSub = i;
@@ -83,12 +87,8 @@ export default {
         },
         changeRadio(e) {
             if (e === '2') {
-                this.complianceInfo.businessTermValidity =
-                    this.complianceInfo.businessTermValidity !== '1' ? this.complianceInfo.businessTermValidity : '2';
-                this.complianceInfo.startBusinessTermValidity =
-                    this.complianceInfo.startBusinessTermValidity !== '1'
-                        ? this.complianceInfo.startBusinessTermValidity
-                        : '2';
+                this.complianceInfo.businessTermValidity = this.complianceInfo.businessTermValidityText.indexOf('-') !== -1 ? this.complianceInfo.businessTermValidityText : '2'
+                this.complianceInfo.startBusinessTermValidity = this.complianceInfo.startBusinessTermValidity !== '1' ? this.complianceInfo.startBusinessTermValidity : '2';
             } else {
                 this.complianceInfo.businessTermValidity = e;
             }
@@ -100,6 +100,7 @@ export default {
                     this.complianceInfo.businessTermValidityText = getDate;
                     this.complianceInfo.businessTermValidity = getDate;
                     break;
+
                 case 2:
                     this.complianceInfo.businessApprovalTime = getDate;
                     break;
@@ -125,7 +126,7 @@ export default {
         },
         nextStep() {
             console.log(this.complianceInfo);
-            if (this.complianceInfo.businessLicensePhoto.length < 0) {
+            if (this.complianceInfo.businessLicensePhoto[0] === '') {
                 Dialog.alert({ message: '请上传营业执照照片' });
                 return false;
             } else if (
@@ -178,13 +179,6 @@ export default {
                 this.complianceInfo.businessApprovalTime === null
             ) {
                 Dialog.alert({ message: '请选择营业执照核准日期' });
-                return false;
-            } else if (
-                this.complianceInfo.businessScope === '' ||
-                this.complianceInfo.businessScope === undefined ||
-                this.complianceInfo.businessScope === null
-            ) {
-                Dialog.alert({ message: '请输入经营范围' });
                 return false;
             } else {
                 Dialog.confirm({
