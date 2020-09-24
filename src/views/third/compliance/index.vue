@@ -88,9 +88,10 @@ export default {
         changeRadio(e) {
             if (e === '2') {
                 this.complianceInfo.businessTermValidity = this.complianceInfo.businessTermValidityText.indexOf('-') !== -1 ? this.complianceInfo.businessTermValidityText : '2'
-                this.complianceInfo.startBusinessTermValidity = this.complianceInfo.startBusinessTermValidity !== '1' ? this.complianceInfo.startBusinessTermValidity : '2';
+                this.complianceInfo.startBusinessTermValidity = this.complianceInfo.startBusinessTermValidityText.indexOf('-') !== -1 ? this.complianceInfo.startBusinessTermValidityText : '2';
             } else {
                 this.complianceInfo.businessTermValidity = e;
+                this.complianceInfo.startBusinessTermValidity = e;
             }
         },
         getValidity(e) {
@@ -176,7 +177,8 @@ export default {
             } else if (
                 this.complianceInfo.businessApprovalTime === '' ||
                 this.complianceInfo.businessApprovalTime === undefined ||
-                this.complianceInfo.businessApprovalTime === null
+                this.complianceInfo.businessApprovalTime === null ||
+                this.complianceInfo.businessApprovalTime.indexOf('-') === -1
             ) {
                 Dialog.alert({ message: '请选择营业执照核准日期' });
                 return false;
