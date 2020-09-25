@@ -28,7 +28,7 @@ export default {
         };
     },
     mounted() {
-        // this.getFinanceInfo();
+        this.getFinanceInfo();
     },
     methods: {
         getFinanceInfo() {

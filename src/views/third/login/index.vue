@@ -41,6 +41,8 @@ export default {
                             }
                         })
                         .catch(res => {
+                            this.isSend = false; 
+                            this.codeText = '发送验证码'
                             Toast.fail({
                                 message: res.msg,
                                 duration: 3000,

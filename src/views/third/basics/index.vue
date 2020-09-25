@@ -74,7 +74,7 @@ export default {
                 this.basicInfo.province = res.data.province;
                 this.basicInfo.country = res.data.country;
                 this.basicInfo.city = res.data.city;
-                this.basicInfo.areaText = res.data.areaText === '' ? res.data.areaText : '选择省/市/区';
+                this.basicInfo.areaText = res.data.areaText !== '' ? res.data.areaText : '选择省/市/区';
                 this.basicInfo.storeAddress = res.data.storeAddress;
                 this.basicInfo.idCardNumber = res.data.idCardNumber;
                 this.basicInfo.frontIDCard = this.getNameByUrl(res.data.frontIDCard);

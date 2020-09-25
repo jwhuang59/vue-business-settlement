@@ -3,9 +3,9 @@ module.exports = {
     devServer: {
         proxy: {
             '/thirdapi': {
-                target: 'http://test1-m.zzgqsh.com',
-                changeOrigin: true
-                // pathRewrite: { '^/thirdapi': '/' }
+                target: 'http://172.17.9.15:1094',
+                changeOrigin: true,
+                pathRewrite: { '^/thirdapi': '/' }
             },
             '/ssoapi': {
                 target: 'http://172.17.8.56:2010',
