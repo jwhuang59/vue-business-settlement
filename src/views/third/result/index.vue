@@ -37,7 +37,7 @@ export default {
     mounted() {
         const getLoginStatus = localStorage.getItem('token');
         if (!getLoginStatus) {
-            this.jump('login');
+            // this.jump('login');
         } else {
             this.getStoreStatus();
             this.getThirdStatus();
@@ -71,7 +71,7 @@ export default {
     watch: {
         shopStatus(val) {
             if (val === 0) {
-                this.jump('basics');
+                // this.jump('basics');
             }
         }
     }

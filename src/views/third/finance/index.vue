@@ -24,7 +24,7 @@ export default {
                 {
                     values: ['思迅', '龙收银']
                 }
-            ]
+            ],
         };
     },
     mounted() {
@@ -33,8 +33,8 @@ export default {
     methods: {
         getFinanceInfo() {
             this.$request('getFinancialInfo').then(res => {
-                if (res.data.paymentList.length === 0) return false;
-                this.financeInfo.cashierSystem = res.data.cashierSystem;
+                if (res.data.paymentList) return false;
+                this.financeInfo.cashierSystem = res.data.cashierSystem ? res.data.cashierSystem : '';
                 switch (res.data.cashierSystem) {
                     case 1:
                         this.financeInfo.cashierSystemCn = '思迅';
@@ -45,7 +45,7 @@ export default {
                 }
                 this.financeInfo.alipayAccount = res.data.alipayAccount;
                 this.financeInfo.wechatMerchant = res.data.wechatMerchant;
-                this.financeInfo.paymentList = res.data.paymentList.length > 0 ? res.data.paymentList : [{}];
+                this.financeInfo.paymentList = res.data.paymentList ? res.data.paymentList : [{}];
             });
         },
         changePicker() {
@@ -162,6 +162,6 @@ export default {
                 }
             }
         }
-    }
+    },
 };
 </script>

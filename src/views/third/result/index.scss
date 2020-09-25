@@ -35,15 +35,16 @@
         margin-top: 20px;
         .channel_item {
             width: 85%;
-            height: 56px;
+            height: 53px;
             margin-bottom: 15px;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
             background: #fff;
-            border-radius: 6px;
+            border-radius: 5px;
             padding: 0 10px;
+            box-shadow: 0px 0px 3px 0px rgba(215, 225, 234, 0.5);
             .item_left {
                 font-size: 14px;
                 color: #31CF6E
@@ -80,11 +81,13 @@
     button {
         width: 90%;
         display: block;
-        margin: 20px auto 0;
+        margin: 30px auto 0;
         height: 90rpx;
+        background: transparent;
         color: #31CF6E;
         border: 1px solid #31CF6E;
         border-radius: 20px;
-        font-size: 15px;
+        font-size: 16px;
+        border-radius: 22.5px;
     }
 }

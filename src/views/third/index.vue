@@ -97,7 +97,8 @@
         color: #31cf6e;
         border: 1px solid #31cf6e;
         border-radius: 20px;
-        font-size: 15px;
+        font-size: 16px;
+        border-radius: 22.5px;
     }
 }
 </style>

@@ -30,7 +30,7 @@ export default {
             showCalendar: false,
             radio: '1',
             minDate: '',
-            maxDate: ''
+            maxDate: '',
         };
     },
     created() {
@@ -68,7 +68,6 @@ export default {
                     this.complianceInfo.businessScope = res.data.businessScope;
                     this.uploadPhotoNum = res.data.businessLicensePhoto.length;
                 }
-                console.log(this.complianceInfo)
             });
             
         },
@@ -126,7 +125,6 @@ export default {
             return newNameByUrl;
         },
         nextStep() {
-            console.log(this.complianceInfo);
             if (this.complianceInfo.businessLicensePhoto[0] === '') {
                 Dialog.alert({ message: '请上传营业执照照片' });
                 return false;
@@ -212,6 +210,6 @@ export default {
                     .catch(() => {});
             }
         }
-    }
+    },
 };
 </script>

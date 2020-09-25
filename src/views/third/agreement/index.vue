@@ -11,7 +11,8 @@ export default {
     },
     data() {
         return {
-            checked: false
+            checked: false,
+            disabled:true
         };
     },
     mounted() {},
@@ -26,6 +27,17 @@ export default {
         getProblem() {
             this.jump('problem');
         }
+    },
+    watch:{
+        checked(){
+            if(this.checked){
+                this.disabled = false;
+            }else{
+                this.disabled = true;
+            }
+        },
+        deep:true
+        
     }
 };
 </script>

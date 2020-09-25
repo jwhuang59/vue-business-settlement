@@ -35,16 +35,16 @@
                 flex-direction: row;
                 justify-content: flex-start;
                 align-items: center;
-                padding: 10px 0;
-                margin-top: 5px;
+                padding: 5px 0;
+                margin-top: 10px;
                 position: relative;
+                border-bottom: 1px solid #ddd;
                 img {
-                    width: 24px;
-                    height: 24px;
+                    width: 21px;
+                    height: 21px;
                 }
                 .code_wrapper {
                     flex: 1;
-                    border-bottom: 1px solid #ddd;
                     input {
                         border: 0;
                         padding: 8px 0;
@@ -60,7 +60,6 @@
                         text-align: center;
                         color: #fff;
                         font-size: 13px;
-                        margin: 6px 0;
                         position: absolute;
                         right: 0;
                         bottom: 10px
@@ -79,7 +78,8 @@
             background: #31CF6E;
             color: #fff;
             border-radius: 20px;
-            font-size: 15px;
+            font-size: 16px;
+            border-radius: 22.5px;
         }
     }
 }
