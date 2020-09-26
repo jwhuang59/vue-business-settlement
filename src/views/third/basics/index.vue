@@ -80,6 +80,7 @@ export default {
                 this.basicInfo.frontIDCard = this.getNameByUrl(res.data.frontIDCard);
                 this.basicInfo.afterIDCard = this.getNameByUrl(res.data.afterIDCard);
                 this.basicInfo.holdIDCard = this.getNameByUrl(res.data.holdIDCard);
+                console.log(this.basicInfo)
                 this.getIDCardPhoto = [res.data.frontIDCard, res.data.afterIDCard, res.data.holdIDCard];
             });
         },
@@ -144,6 +145,7 @@ export default {
             }
         },
         getNameByUrl(url) {
+            if(!url) return '';
             const formatUrl = url.split('?')[0].split('/');
             return formatUrl[3] + '/' + formatUrl[4];
         },

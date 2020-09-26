@@ -96,6 +96,7 @@ export default {
             console.log(this.uploadFileImg);
         },
         getNameByUrl(url) {
+            if(!url) return '';
             const formatUrl = url.split('?')[0].split('/');
             return formatUrl[3] + '/' + formatUrl[4];
         },
