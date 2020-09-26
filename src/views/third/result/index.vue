@@ -61,6 +61,7 @@ export default {
                     }
                     
                 });
+                console.log(this.thirdInfo)
             });
         },
         toChannel(i) {
