@@ -3,7 +3,7 @@ module.exports = {
     devServer: {
         proxy: {
             '/thirdapi': {
-                target: 'http://192.168.10.234:1094',
+                target: 'http://172.17.9.15:1094',
                 changeOrigin: true,
                 pathRewrite: { '^/thirdapi': '/' }
             },

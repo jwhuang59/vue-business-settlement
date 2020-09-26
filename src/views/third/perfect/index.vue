@@ -42,7 +42,7 @@ export default {
     methods: {
         getPerfectInfo() {
             this.$request('getPerfectInfo').then(res => {
-                if (res.data !== '') return false;
+                if (!res.data.healthPhoto) return false;
                 this.perfectMenu[0].uploadPhotoNum = res.data.healthPhoto.length;
                 this.perfectMenu[0].uploadPhotoMenu = this.getNameByUrl(res.data.healthPhoto);
                 this.perfectMenu[0].uploadFileImg = res.data.healthPhoto;
