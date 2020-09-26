@@ -31,7 +31,7 @@ export default {
                     thirdStatus: 0,
                     thirdType: 4
                 }
-            ]
+            ],
         };
     },
     mounted() {
@@ -51,9 +51,15 @@ export default {
         },
         getThirdStatus() {
             this.$request('getThirdPartyStatus').then(res => {
-                if (res.data.length === 0) return false;
-                res.data.map((item, index) => {
-                    this.$set(this.thirdInfo[index], 'thirdStatus', item.status);
+                const { data } = res
+                if (data.length === 0) return false;
+                this.thirdInfo.forEach((item, index) => {
+                    for(const i in data){
+                        if(item.thirdType === data[i].type){
+                            this.$set(this.thirdInfo[index], 'thirdStatus', data[i].status); 
+                        }
+                    }
+                    
                 });
             });
         },

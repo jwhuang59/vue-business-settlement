@@ -43,31 +43,30 @@ export default {
     methods: {
         getComplianceInfo() {
             this.$request('getComplianceInfo').then(res => {
-                if (res.data.businessLicensePhoto) {
-                    this.uploadFileImg = res.data.businessLicensePhoto;
-                    this.complianceInfo.businessLicensePhoto = this.getNameByUrl(res.data.businessLicensePhoto);
-                    this.complianceInfo.businessLicenseName = res.data.businessLicenseName;
-                    this.complianceInfo.legalRepresentativeName = res.data.legalRepresentativeName;
-                    this.complianceInfo.unifiedCreditCode = res.data.unifiedCreditCode;
-                    this.complianceInfo.businessRegisteredAddress = res.data.businessRegisteredAddress;
+                this.uploadFileImg = res.data.businessLicensePhoto;
+                this.complianceInfo.businessLicensePhoto = this.getNameByUrl(res.data.businessLicensePhoto);
+                this.complianceInfo.businessLicenseName = res.data.businessLicenseName;
+                this.complianceInfo.legalRepresentativeName = res.data.legalRepresentativeName;
+                this.complianceInfo.unifiedCreditCode = res.data.unifiedCreditCode;
+                this.complianceInfo.businessRegisteredAddress = res.data.businessRegisteredAddress;
+                this.complianceInfo.businessTermValidity = res.data.businessTermValidity;
+                if (res.data.businessTermValidity !== '1') {
+                    this.radio = '2';
                     this.complianceInfo.businessTermValidity = res.data.businessTermValidity;
-                    if (res.data.businessTermValidity !== '1') {
-                        this.radio = '2';
-                        this.complianceInfo.businessTermValidity = res.data.businessTermValidity;
-                        this.complianceInfo.businessTermValidityText = res.data.businessTermValidity;
-                        this.complianceInfo.startBusinessTermValidity = res.data.startBusinessTermValidity;
-                        this.complianceInfo.startBusinessTermValidityText = res.data.startBusinessTermValidity;
-                    } else {
-                        this.radio = '1';
-                        this.complianceInfo.businessTermValidity = '1';
-                        this.complianceInfo.businessTermValidityText = '结束日期';
-                        this.complianceInfo.startBusinessTermValidity = '1';
-                        this.complianceInfo.startBusinessTermValidityText = '开始日期';
-                    }
-                    this.complianceInfo.businessApprovalTime = res.data.businessApprovalTime;
-                    this.complianceInfo.businessScope = res.data.businessScope;
-                    this.uploadPhotoNum = res.data.businessLicensePhoto.length;
+                    this.complianceInfo.businessTermValidityText = res.data.businessTermValidity;
+                    this.complianceInfo.startBusinessTermValidity = res.data.startBusinessTermValidity;
+                    this.complianceInfo.startBusinessTermValidityText = res.data.startBusinessTermValidity;
+                } else {
+                    this.radio = '1';
+                    this.complianceInfo.businessTermValidity = '1';
+                    this.complianceInfo.businessTermValidityText = '结束日期';
+                    this.complianceInfo.startBusinessTermValidity = '1';
+                    this.complianceInfo.startBusinessTermValidityText = '开始日期';
                 }
+                this.complianceInfo.businessApprovalTime = res.data.businessApprovalTime;
+                this.complianceInfo.businessScope = res.data.businessScope;
+                this.uploadPhotoNum = res.data.businessLicensePhoto.length;
+                
             });
             
         },
