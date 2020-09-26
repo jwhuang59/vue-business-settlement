@@ -43,7 +43,7 @@ export default {
     methods: {
         getComplianceInfo() {
             this.$request('getComplianceInfo').then(res => {
-                this.complianceInfo.unifiedCreditCode = res.data.unifiedCreditCode;
+                this.$set(this.complianceInfo,'unifiedCreditCode',res.data.unifiedCreditCode)
                 if (res.data.businessLicensePhoto) {
                     this.uploadFileImg = res.data.businessLicensePhoto;
                     this.complianceInfo.businessLicensePhoto = this.getNameByUrl(res.data.businessLicensePhoto);
