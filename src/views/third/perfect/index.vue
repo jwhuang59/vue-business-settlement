@@ -13,21 +13,21 @@ export default {
         return {
             perfectMenu: [
                 {
-                    title: '法人健康证*',
+                    title: '法人健康证',
                     photoNum: 1,
                     uploadPhotoNum: 0,
                     uploadPhotoMenu: [''],
                     uploadFileImg: ['']
                 },
                 {
-                    title: '门头照片*',
+                    title: '门头照片',
                     photoNum: 6,
                     uploadPhotoNum: 0,
                     uploadPhotoMenu: [''],
                     uploadFileImg: ['']
                 },
                 {
-                    title: '店内照片*',
+                    title: '店内照片',
                     photoNum: 6,
                     uploadPhotoNum: 0,
                     uploadPhotoMenu: [''],
@@ -42,7 +42,7 @@ export default {
     methods: {
         getPerfectInfo() {
             this.$request('getPerfectInfo').then(res => {
-                if (res.data.healthPhoto[0] === '') return false;
+                if (res.data !== '') return false;
                 this.perfectMenu[0].uploadPhotoNum = res.data.healthPhoto.length;
                 this.perfectMenu[0].uploadPhotoMenu = this.getNameByUrl(res.data.healthPhoto);
                 this.perfectMenu[0].uploadFileImg = res.data.healthPhoto;
