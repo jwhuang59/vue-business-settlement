@@ -21,7 +21,6 @@ export default {
             showPicker: false,
             cityList: [],
             loading: false,
-            disabled: true
         };
     },
     created() {
@@ -70,7 +69,6 @@ export default {
         getBasicInfo() {
             this.$request('getBasicInfo').then(res => {
                 if (!res.data.storePhone) return false;
-                this.disabled = false
                 this.basicInfo.storeName = res.data.storeName;
                 this.basicInfo.storePhone = res.data.storePhone;
                 this.basicInfo.province = res.data.province;
@@ -230,23 +228,5 @@ export default {
             }
         }
     },
-    watch:{
-        basicInfo:{
-            handler(oldVal,newVal){
-                for(var i in this.basicInfo){
-                    if(newVal[i] !== '') {
-                        this.disabled = false;
-                        break;
-                    }else {
-                        this.disabled = true;
-                    }
-                }
-
-            },
-            immediate:true,
-            deep:true
-        },
-        
-    }
 };
 </script>
