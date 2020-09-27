@@ -33,7 +33,6 @@ export default {
     methods: {
         getFinanceInfo() {
             this.$request('getFinancialInfo').then(res => {
-                if (res.data.paymentList.length === 0) return false;
                 this.financeInfo.cashierSystem = res.data.cashierSystem ? res.data.cashierSystem : '';
                 switch (res.data.cashierSystem) {
                     case 1:
@@ -43,6 +42,7 @@ export default {
                         this.financeInfo.cashierSystemCn = '龙收银';
                         break;
                 }
+                if (res.data.paymentList.length === 0) return false;
                 this.financeInfo.alipayAccount = res.data.alipayAccount;
                 this.financeInfo.wechatMerchant = res.data.wechatMerchant;
                 this.financeInfo.paymentList = res.data.paymentList ? res.data.paymentList : [{}];
