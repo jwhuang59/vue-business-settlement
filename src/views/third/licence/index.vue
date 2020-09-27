@@ -59,8 +59,6 @@ export default {
                     this.licenceList[i].licenseRegistrationAddress = licenceList[i].licenseRegistrationAddress;
                     this.licenceList[i].licenseValidity = licenceList[i].licenseValidity;
                     this.licenceList[i].licenseApprovalTime = licenceList[i].licenseApprovalTime;
-                    this.licenceList[i].licenseValidity = licenceList[i].licenseValidity;
-                    this.licenceList[i].licenseApprovalTime = licenceList[i].licenseApprovalTime;
                     this.licenceList[i].remark = licenceList[i].remark;
                 }
             });
@@ -133,14 +131,16 @@ export default {
                 } else if (
                     this.licenceList[i].licenseValidity === '' ||
                     this.licenceList[i].licenseValidity === undefined ||
-                    this.licenceList[i].licenseValidity === null
+                    this.licenceList[i].licenseValidity === null || 
+                    this.licenceList[i].licenseValidity.indexOf('-') === -1
                 ) {
                     Dialog.alert({ message: '请输入许可证有效日期' });
                     return false;
                 } else if (
                     this.licenceList[i].licenseApprovalTime === '' ||
                     this.licenceList[i].licenseApprovalTime === undefined ||
-                    this.licenceList[i].licenseApprovalTime === null
+                    this.licenceList[i].licenseApprovalTime === null || 
+                    this.licenceList[i].licenseApprovalTime.indexOf('-') === -1
                 ) {
                     Dialog.alert({ message: '请输入许可证签发日期' });
                     return false;
