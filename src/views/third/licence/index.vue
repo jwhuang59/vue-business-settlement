@@ -162,7 +162,7 @@ export default {
                                     forbidClick: true
                                 });
                                 setTimeout(() => {
-                                    this.jump('perfect');
+                                    this.jump('perfect',{'type':this.$route.query.type});
                                 }, 3000);
                             }
                         })

@@ -82,7 +82,7 @@ export default {
                         forbidClick: true
                     });
                     setTimeout(() => {
-                        this.jump('licence');
+                        this.jump('licence',{'type':this.$route.query.type});
                     }, 3000);
                 })
                 .catch(() => {});

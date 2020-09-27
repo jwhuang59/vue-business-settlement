@@ -19,7 +19,7 @@ export default {
     methods: {
         nextStep() {
             if (this.checked) {
-                this.jump('standard');
+                this.jump('standard',{'type':this.$route.query.type});
             } else {
                 Dialog.alert({ message: '请阅读并同意《锅圈运营服务协议》' });
             }

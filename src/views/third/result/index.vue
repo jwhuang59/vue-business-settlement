@@ -69,7 +69,7 @@ export default {
                 type: 'save_channel',
                 playload: i || ''
             });
-            this.jump('agreement');
+            this.jump('agreement',{'type':i});
         },
         getProblem() {
             this.jump('problem');

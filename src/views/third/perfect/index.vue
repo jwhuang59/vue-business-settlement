@@ -107,7 +107,7 @@ export default {
                             healthPhoto: this.perfectMenu[0].uploadPhotoMenu,
                             doorheadPhoto: this.perfectMenu[1].uploadPhotoMenu,
                             storePhoto: this.perfectMenu[2].uploadPhotoMenu,
-                            type: this.$store.state.data.channel
+                            type: this.$route.query.type
                         })
                             .then(res => {
                                 if (res.data) {
