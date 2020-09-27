@@ -33,7 +33,7 @@ export default {
     methods: {
         getFinanceInfo() {
             this.$request('getFinancialInfo').then(res => {
-                if (res.data.paymentList) return false;
+                if (res.data.paymentList.length === 0) return false;
                 this.financeInfo.cashierSystem = res.data.cashierSystem ? res.data.cashierSystem : '';
                 switch (res.data.cashierSystem) {
                     case 1:
