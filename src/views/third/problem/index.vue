@@ -12,18 +12,8 @@ export default {
         };
     },
     onLoad() {
-        this.$store.commit({
-            type: 'save_step',
-            playload: this.active || 0
-        });
     },
     methods: {
-        nextStep() {
-            this.$store.commit({
-                type: 'save_step',
-                playload: this.active || 0
-            });
-        },
         getProblem() {
             this.jump('problem');
         }

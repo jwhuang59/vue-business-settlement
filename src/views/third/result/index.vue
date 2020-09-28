@@ -37,7 +37,7 @@ export default {
     mounted() {
         const getLoginStatus = localStorage.getItem('token');
         if (!getLoginStatus) {
-            // this.jump('login');
+            this.jump('login');
         } else {
             this.getStoreStatus();
             this.getThirdStatus();
@@ -64,12 +64,9 @@ export default {
                 console.log(this.thirdInfo)
             });
         },
-        toChannel(i) {
-            this.$store.commit({
-                type: 'save_channel',
-                playload: i || ''
-            });
-            this.jump('agreement',{'type':i});
+        toChannel(status) {
+            if(status === 2) return false;
+            this.jump('agreement');
         },
         getProblem() {
             this.jump('problem');
@@ -78,7 +75,7 @@ export default {
     watch: {
         shopStatus(val) {
             if (val === 0) {
-                // this.jump('basics');
+                this.jump('basics');
             }
         }
     }

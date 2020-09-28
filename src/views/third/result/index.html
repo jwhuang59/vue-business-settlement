@@ -20,7 +20,7 @@
         <p>审核驳回，请重新提交资料</p>
     </div>
     <div class="channel_menu">
-        <div class="channel_item" v-for="(item,index) in thirdInfo" @click="toChannel(item.thirdType)">
+        <div class="channel_item" v-for="(item,index) in thirdInfo" @click="toChannel(item.thirdStatus)">
             <div class="item_left">{{item.thirdText}}</div>
             <div class="item_right" v-if="item.thirdStatus === 0">
                 <van-icon name="question" class="icon_question" />
