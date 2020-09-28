@@ -101,7 +101,7 @@ export default {
         nextStep() {
 
             const newLicenceList = this.licenceList.filter(item => {
-                if(item.licensePhoto !== ""){
+                if(item.licensePhoto){
                     return item
                 }
             })
