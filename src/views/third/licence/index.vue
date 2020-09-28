@@ -91,7 +91,7 @@ export default {
             this.uploadPhotoNum++;
             this.$set(this.licenceList[data.sub], 'licensePhoto', data.name);
             this.$set(this.uploadFileImg, data.sub, data.img);
-            console.log(this.uploadFileImg);
+
         },
         getNameByUrl(url) {
             if(!url) return '';
@@ -99,48 +99,60 @@ export default {
             return formatUrl[3] + '/' + formatUrl[4];
         },
         nextStep() {
-            for (const i in this.licenceList) {
+
+            const newLicenceList = this.licenceList.filter(item => {
+                if(item.licensePhoto !== ""){
+                    return item
+                }
+            })
+            console.log(newLicenceList)
+            for (const i in newLicenceList) {
+                
                 if (
-                    this.licenceList[i].licensePhoto === '' ||
-                    this.licenceList[i].licensePhoto === undefined ||
-                    this.licenceList[i].licensePhoto === null
+                    newLicenceList[i].licensePhoto === '' ||
+                    newLicenceList[i].licensePhoto === undefined ||
+                    newLicenceList[i].licensePhoto === null
                 ) {
                     Dialog.alert({ message: '请上传许可证照片' });
+                    Dialog.alert({
+                        title: '请点击上传许可证照片',
+                        message: '填写许可证详细信息',
+                    })
                     return false;
                 } else if (
-                    this.licenceList[i].licenseTypeName === '' ||
-                    this.licenceList[i].licenseTypeName === undefined ||
-                    this.licenceList[i].licenseTypeName === null
+                    newLicenceList[i].licenseTypeName === '' ||
+                    newLicenceList[i].licenseTypeName === undefined ||
+                    newLicenceList[i].licenseTypeName === null
                 ) {
                     Dialog.alert({ message: '请输入执照类型名称' });
                     return false;
                 } else if (
-                    this.licenceList[i].licenseNumber === '' ||
-                    this.licenceList[i].licenseNumber === undefined ||
-                    this.licenceList[i].licenseNumber === null
+                    newLicenceList[i].licenseNumber === '' ||
+                    newLicenceList[i].licenseNumber === undefined ||
+                    newLicenceList[i].licenseNumber === null
                 ) {
                     Dialog.alert({ message: '请输入许可证编码' });
                     return false;
                 } else if (
-                    this.licenceList[i].licenseRegistrationAddress === '' ||
-                    this.licenceList[i].licenseRegistrationAddress === undefined ||
-                    this.licenceList[i].licenseRegistrationAddress === null
+                    newLicenceList[i].licenseRegistrationAddress === '' ||
+                    newLicenceList[i].licenseRegistrationAddress === undefined ||
+                    newLicenceList[i].licenseRegistrationAddress === null
                 ) {
                     Dialog.alert({ message: '请输入许可证注册地址' });
                     return false;
                 } else if (
-                    this.licenceList[i].licenseValidity === '' ||
-                    this.licenceList[i].licenseValidity === undefined ||
-                    this.licenceList[i].licenseValidity === null || 
-                    this.licenceList[i].licenseValidity.indexOf('-') === -1
+                    newLicenceList[i].licenseValidity === '' ||
+                    newLicenceList[i].licenseValidity === undefined ||
+                    newLicenceList[i].licenseValidity === null || 
+                    newLicenceList[i].licenseValidity.indexOf('-') === -1
                 ) {
                     Dialog.alert({ message: '请输入许可证有效日期' });
                     return false;
                 } else if (
-                    this.licenceList[i].licenseApprovalTime === '' ||
-                    this.licenceList[i].licenseApprovalTime === undefined ||
-                    this.licenceList[i].licenseApprovalTime === null || 
-                    this.licenceList[i].licenseApprovalTime.indexOf('-') === -1
+                    newLicenceList[i].licenseApprovalTime === '' ||
+                    newLicenceList[i].licenseApprovalTime === undefined ||
+                    newLicenceList[i].licenseApprovalTime === null || 
+                    newLicenceList[i].licenseApprovalTime.indexOf('-') === -1
                 ) {
                     Dialog.alert({ message: '请输入许可证签发日期' });
                     return false;
@@ -152,7 +164,7 @@ export default {
             })
                 .then(() => {
                     this.$request('updateLicenseInfo', {
-                        licenceList: this.licenceList
+                        licenceList: newLicenceList
                     })
                         .then(res => {
                             if (res.data) {

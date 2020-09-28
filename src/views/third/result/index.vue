@@ -64,9 +64,9 @@ export default {
                 console.log(this.thirdInfo)
             });
         },
-        toChannel(status) {
-            if(status === 2) return false;
-            this.jump('agreement');
+        toChannel(type,status) {
+            if(status === 2 || status === 3) return false;
+            this.jump('agreement',{ type });
         },
         getProblem() {
             this.jump('problem');
