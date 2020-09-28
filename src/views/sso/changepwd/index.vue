@@ -24,10 +24,7 @@ export default {
             if (this.phoneBlur()) {
                 const { code, data, msg } = await this.$request('send', this.phone);
                 if (code === 200) {
-                    this.$notify({
-                        type: 'success',
-                        message: '验证码发送成功'
-                    });
+                    this.$toast.success('验证码发送成功');
                     this.codeText = this.time + 's';
                     this.timer = setInterval(() => {
                         if (this.time === 1) {
@@ -51,10 +48,10 @@ export default {
             };
             const { code, data, msg } = await this.$request('resetPass', obj);
             if (code === 200) {
-                this.$notify({
+                this.$toast({
                     type: 'success',
                     message: '密码重置成功',
-                    onClose: () => {
+                    onClose() {
                         location.reload();
                     }
                 });
