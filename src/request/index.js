@@ -1,11 +1,26 @@
 import axios from 'axios';
 import CryptoJS from '../libs/crypto.js';
 import apis from './modules';
-import { Notify } from 'vant';
+import { Toast, Notify } from 'vant';
 import { loading } from '@/commons/loading';
 
 let httpCount = 0;
 const that = this;
+/**
+ * 给Promise增加finally函数
+ * @param {*} callback
+ */
+Promise.prototype.finally = function (callback) {
+    const P = this.constructor;
+    return this.then(
+        value => P.resolve(callback()).then(() => value),
+        reason =>
+            P.resolve(callback()).then(() => {
+                throw reason;
+            })
+    );
+};
+
 /**
  * 请求拦截器
  */
@@ -94,13 +109,14 @@ function successHandler(resp, resolve, reject) {
  * @param error
  */
 function errorHandler(resp) {
-    Notify({
-        message: resp && resp.data ? `异常信息：${resp.data.message || resp.data.msg || '系统异常'}` : '系统异常',
-        color: '#ad0000',
-        background: '#ffe1e1',
-        duration: 3000
+    const message = resp && resp.data ? `${resp.data.message || resp.data.msg || '系统异常'}` : '系统异常';
+    Toast({
+        type: 'fail',
+        message,
+        onClose() {
+            closeLoading();
+        }
     });
-    closeLoading();
 }
 
 /**
