@@ -90,17 +90,18 @@ function successHandler(resp, resolve, reject) {
     if (resp.request.responseType === 'arraybuffer') {
         resolve(resp.data);
     } else {
-        if (resp.data.code === 200) {
-            resolve(resp.data);
-        } else if (resp.data.code === 401) {
-            if (location.pathname !== '/login') {
-                location.href = '/login';
-            }
-        } else if (resp.config.pem) {
-            reject(resp.data);
-        } else {
-            errorHandler(resp);
-        }
+        resolve(resp.data);
+        // if (resp.data.code === 200) {
+        //     resolve(resp.data);
+        // } else if (resp.data.code === 401) {
+        //     if (location.pathname !== '/login') {
+        //         location.href = '/login';
+        //     }
+        // } else if (resp.config.pem) {
+        //     reject(resp.data);
+        // } else {
+        //     errorHandler(resp);
+        // }
     }
 }
 

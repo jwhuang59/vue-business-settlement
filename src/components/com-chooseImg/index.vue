@@ -53,6 +53,7 @@ export default {
             this.$refs.camera_input.appendChild(input);
             input.onchange = e => {
                 this.showLoading = true;
+                console.log(e)
                 if (e.target.files.length === 0) return false;
                 setTimeout(() => {
                     const formData = new FormData();
